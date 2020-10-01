@@ -1,0 +1,24 @@
+Christian Zinck
+CQs 5
+10/9/18
+
+1. 
+a.      B
+b.      A
+
+2.
+a.      (not? f0)
+b.      (and? f0)
+c.      (or f0?)
+
+3.
+a.      #t
+b.      #f
+c.      #t
+d.      #f
+e.      #t
+
+4.
+a.      is solved by '((y #t))
+b.      is solved by '((x #f))
+c.      has no solution

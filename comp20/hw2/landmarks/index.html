@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Landmarks</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+      <link rel="stylesheet" href="style.css"/>
+      <script src="https://maps.google.com/maps/api/js?libraries=geometry"></script>
+      <script>
+	 function start()
+	 {
+	    var myLat = 0;
+	    var myLng = 0;
+	    var myLoc = new google.maps.LatLng(myLat, myLng);
+	    navigator.geolocation.getCurrentPosition(function(position) {
+               myLat = position.coords.latitude;
+	       myLng = position.coords.longitude;
+               myLoc = new google.maps.LatLng(myLat, myLng);
+
+	       var request = new XMLHttpRequest();     
+               request.open("POST", "https://fathomless-eyrie-97751.herokuapp.com/sendLocation", "true");
+               request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ 
+               request.onreadystatechange = function() {
+                  if (request.readyState == 4 && request.status == 200) {
+                     locs = JSON.parse(request.responseText);
+                     var myOpt = {
+                        zoom: 13,
+                        center: {lat: myLat, lng: myLng},
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                     };
+
+                     var map = new google.maps.Map(document.getElementById("map"), myOpt); 
+                     var infowindow = new google.maps.InfoWindow();
+
+		     var me = new google.maps.Marker({
+                        position: myLoc,
+                        title: "Me",
+			icon: "https://cdn4.iconfinder.com/data/icons/24x24-free-pixel-icons/24/User.png"
+                     });
+		     google.maps.event.addListener(me, 'click', function() {
+		        infowindow.setContent(locs.landmarks[0].properties.Location_Name + ": " + (google.maps.geometry.spherical.computeDistanceBetween(myLoc, {lat: parseFloat(locs.landmarks[0].geometry.coordinates[1]), lng: parseFloat(locs.landmarks[0].geometry.coordinates[0])})*.000621371) + " miles away.");
+			infowindow.open(map, me);
+		     });
+		     me.setMap(map);
+
+		     var peopleMarkers = [];
+		     for (var i = 0; i < locs.people.length; i++)
+		     {
+		        peopleMarkers[i] = new google.maps.Marker({
+			   position: {lat: parseFloat(locs.people[i].lat), lng: parseFloat(locs.people[i].lng)},
+			   title: locs.people[i].login,
+			   icon: "https://cdn4.iconfinder.com/data/icons/24x24-free-pixel-icons/24/Unknown_person.png"
+		        });
+			google.maps.event.addListener(peopleMarkers[i], 'click', function() {
+                           infowindow.setContent(peopleMarkers[i].title + ": " + (google.maps.geometry.spherical.computeDistanceBetween(myLoc, peopleMarkers[i].position)*.000621371) + " miles away.");
+                           infowindow.open(map, peopleMarkers[i]);
+                        });
+			peopleMarkers[i].setMap(map);
+		     }
+
+		     var landmarkMarkers = [];
+		     var details = [];
+		     for (var i = 0; i < locs.landmarks.length; i++)
+		     {
+			details[i] = locs.landmarks[i].properties.Details;
+		     	landmarkMarkers[i] = new google.maps.Marker({
+			   position: {lat: parseFloat(locs.landmarks[i].geometry.coordinates[1]), lng: parseFloat(locs.landmarks[i].geometry.coordinates[0])},
+			   title: locs.landmarks[i].properties.Location_Name,
+			   icon: "https://cdn4.iconfinder.com/data/icons/24x24-free-pixel-icons/24/Camera.png"
+		        });
+			google.maps.event.addListener(landmarkMarkers[i], 'click', function() {
+			   infowindow.setContent(details[i]);
+                           infowindow.open(map, landmarkMarkers[i]);
+                        });
+			landmarkMarkers[i].setMap(map);
+		     }
+
+		     var closest = new google.maps.Polyline({
+		        path: [myLoc, {lat: parseFloat(locs.landmarks[0].geometry.coordinates[1]), lng: parseFloat(locs.landmarks[0].geometry.coordinates[0])}],
+ 		        strokeColor: '#FF0000'
+		     });
+		     closest.setMap(map);
+                  }
+               }
+               request.send("login=b8DX763T&lat="+ myLat + "&lng=" + myLng);
+	    });
+	 }
+      </script>
+   </head>
+
+   <body onload="start()">
+      <div id="map"></div>
+   </body>
+</html>

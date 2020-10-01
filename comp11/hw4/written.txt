@@ -1,0 +1,26 @@
+Written #1
+
+1A. void foo(int &, int);
+
+1B. string bar();
+
+1C. foo(a, b);
+
+1D. string text = bar();
+
+Written #2
+
+5. Wow
+
+12.
+bool even(int num)
+{
+	if (num % 2 == 0)
+		return true;
+	return false;
+}
+
+22. The function will not perform correctly. The return type of the function is a double but at the time of the return line, the data type of inches is an int.
+
+Written #3
+0 2 4 6 8 10 12 14 16 18

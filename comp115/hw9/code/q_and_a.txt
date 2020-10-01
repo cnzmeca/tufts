@@ -1,0 +1,72 @@
+1) In auto-commit mode (no transaction boundaries), there are bad
+balances and bad audits, but nothing else goes wrong. Explain this by
+demonstrating the interleaving of the steps of two processes that can
+produce a) a bad balance, and b) a bad audit.
+
+2) With READ COMMITTED isolation, there are bad balances, but nothing
+else goes wrong. Explain this, again by showing an interleaving of the
+steps of two processes.
+
+3) With SERIALIZABLE isolation, the only problem is failed
+transfers. (You could conceivably see a failed commit too.) Explain a
+failed transfer by showing an interleaving of the steps of two
+processes that produces this result.
+
+
+1.
+Bad balances occur when a balance is negative. In auto-commit mode, this can occur via dirty read.
+T1	T2
+RA
+	RA
+WA
+	WA
+
+Bad audits occur when there is an error in one of the balance values. This can again occur when
+there is a dirty read.
+
+T1      T2
+RA
+        RA
+WA
+        WA
+RB
+WB
+	RB
+	WB	
+2.
+Bad balances occur when a balance is negative. In read committed isolation, this can occur when
+a 2 transfers between accounts A and B both read a balance before either have updated it.
+
+T1	T2
+BEGIN
+RA	
+	BEGIN
+	RA
+WA
+RB
+WB
+COMMIT
+	WA
+	RB
+	WB
+	COMMIT
+3.
+Failed transfers occur when a transfer query tries to access a file that is currently in the process
+of being written by another query.
+
+T1	T2
+BEGIN
+RA
+WA
+	BEGIN
+	RA
+	WA
+	RB
+	WB
+	COMMIT
+RB
+WB
+COMMIT
+
+In this schedule T2 tries to read A before T1 has committed its write, resulting in a failed
+transfer.

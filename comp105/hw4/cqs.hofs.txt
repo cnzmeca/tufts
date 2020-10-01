@@ -1,0 +1,49 @@
+Christian Zinck
+CQs 4
+10/2/18
+
+1.
+map             L               
+filter          L
+exists?         B
+all?            B
+curry           F
+uncurry         F
+foldl           A
+foldr           A
+
+2.
+map             S
+filter          M
+exists?         V
+all?            V
+curry           V
+uncurry         V
+foldl           ?
+foldr           ?
+
+3.
+map             +
+filter          +
+exists?         +
+all?            +
+curry           F2
+uncurry         F
+foldl           +
+foldr           +
+
+4.
+a.      They will be the same because addition is commutative.
+b.      They will be different because cons is not commutative. Foldl will
+        produce '(3 2 1) and foldr will produce '(1 2 3)
+c.      * will return the same result either way.
+d.      - may return different results for foldl and foldr
+
+5.      ((flip f) x y) == (f y x)
+
+6.
+a.      Good
+b.      Bad
+c.      Good
+d.      Good
+e.      Bad

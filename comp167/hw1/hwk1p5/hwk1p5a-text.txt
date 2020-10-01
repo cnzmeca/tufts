@@ -1,0 +1,13 @@
+Christian Zincjk
+hwk1p5a
+9/20/18
+
+1.	One way to select a subset of the genes for corollation with smoking
+status is to find the genes with the greatest distance between known
+current smokers and known never smokers.
+
+2.	Another way to select a subset would be to randomly select genes, and
+then perform cross validation using only the distances from the selected genes.
+If the gene improves the average correctly labeled through cross validation,
+it may be more strongly correlated with smoking status than a gene that lowers
+the average.

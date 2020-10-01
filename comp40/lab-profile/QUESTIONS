@@ -1,0 +1,26 @@
+UNBLACKEDGES
+
+Please put answers to questions here.
+
+  * What fraction of time is spent in I/O as compared with removing
+    black edges?
+	42.89% of time is spent removing black edges and 67.09% of time is spent
+on i/o
+  
+  * How long does
+  
+       time ./unblackedges 
+  
+    take?
+	.7 seconds when run on hyphen.png
+  
+  * After making changes requested in the lab handout (steps 1-4), what
+    happened to the total time?
+	it stayed the same
+  
+  * What happened to the fraction of time spent in Bit_put?
+	it went down by .02%  
+
+  * Since the implementation of Bit_put has not been improved, what has
+    changed?
+  the frequency at which Bit_put was called decreased.

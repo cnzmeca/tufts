@@ -1,0 +1,13 @@
+11
+Christian 2048
+Christian 1024
+Christian 512
+Christian 256
+Christian 128
+Christian 64
+Christian 32
+Christian 16
+Christian 8
+Christian 4
+Christian 0
+-1

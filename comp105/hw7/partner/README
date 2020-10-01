@@ -1,0 +1,11 @@
+Christian Zinck
+HW 7
+10/26/18
+
+a.      The type constructor array is of kind TYPE
+b.      Array.make is of type: int * value -> value
+        Array.at is of type: value array * int -> value
+        Array.at-put is of type: value array * int * value -> unit
+        Array.length is of type: value array -> value
+
+I did not collaborate with anyone on this assignment.

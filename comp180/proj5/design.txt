@@ -1,0 +1,10 @@
+My multithreaded regex matcher performs a breadth first search on the possible state transitions
+until it finds a series of transitions that match the given string, in which case it returns
+true. Otherwise, false is returned. First, all states that can be reached using exactly 0
+characters of the string are determined. From there, a thread will be assigned to each initial
+state until the maximum threads is used or each state is being handled by a thread. Each thread
+will then find the list of all possible states reachable using exactly 1 character, passing
+through the states that were reachable by using 0 characters. This process repeats until a
+series of transitions is found that uses all n characters of the string. If that series ends in
+a final state, the algorithm accepts, otherwise it continues searching. If no such series can be
+found, then the regex matcher finally rejects.

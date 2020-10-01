@@ -1,0 +1,6 @@
+include com.tasm
+macro or
+com p2,p2
+com p3,p3
+nand p1,p2,p3
+mend

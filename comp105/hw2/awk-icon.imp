@@ -1,0 +1,16 @@
+;;Christian Zinck
+;;Q 22
+;;9/18/18
+
+;;(implicit) causes a run-time error for standard Impcore and set a variable x
+;;to 1 for Impcore with Icon-like or Awk-like semantics
+(define implicit ()
+    (set x 1))
+
+;;(output) prints the value in a variable x, which is 1 if x is global (Awk) and
+;;0 if x is formal (Icon)
+(define output ()
+    (println x))
+
+(implicit)
+(output)

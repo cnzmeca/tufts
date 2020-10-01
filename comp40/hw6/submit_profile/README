@@ -1,0 +1,21 @@
+Christian Zinck and Phong Hoang
+
+We received help from TAs and discussed the assignnment with classmates.
+
+The main function takes up 70% of the program, and the if-else tower is the
+most time consuming part of the main while loop.
+
+After thorough analysis of the assembly code of the entire main function, we
+were unable to identify any unnecessary memory accesses or loop computations.
+We were careful to remove as many of these speeddowns as possible during our
+profiling assignment and the ones we may have missed were almost certainly
+caught by compiling our code and the library code with O2. That said, upon
+reviewing the assembly code, we discovered and interesting and unexpected
+feature of if-else towers in assembly. The jump logic for our if-else tower
+was divided into two separate jump tables, one containing the first 7 cases and
+the second containing the last 7. We suspect that these groupings are so the
+more frequently used cases (the first 7) can be accessed more quickly by
+sacrificing the speed at which the less frequently used cases (the last 7) can
+be accessed.
+
+We spent 5 hours analyzing and 25 hours solving.

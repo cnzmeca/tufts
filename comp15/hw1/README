@@ -1,0 +1,45 @@
+Christian Zinck
+HW 1
+
+Assignment Purpose:
+The purpose of this program is to create and test a character sequence class.
+
+Help Received:
+I did not receive any help with this assignment.
+
+Files Provided:
+CharSequence.cpp - the cpp file for the CharSequence class. Contains all member
+functions and data.
+CharSequence.h - the header file for the CharSequence class. Contains the class
+definition.
+testCharSequence.cpp - the test file for the CharSequence class. Contains unit
+testing of each public member function and constructor.
+README - this file.
+
+Compilation and Execution:
+To compile this program, enter:
+'clang++ -Wall -Wextra testCharSequence.cpp CharSequence.cpp'
+into your command prompt.
+To run this program, enter './a.out' into your command prompt.
+
+Data Structures:
+In this assignment the data structure I used was a sequence, or dynamically
+allocated array. Sequences are created using the new operator, so they exist
+on the heap and must be deallocated before the end of the program to prevent
+memory leakage.
+	Pros: Sequences are very good at accessing and altering elements based
+	on index. It is also very easy to append to the end of a sequence,
+	provided it has sufficient capacity.
+	Cons: Sequences have a predetermined capacity, and once that capacity
+	is reached, the sequence must be copied over to another with greater
+	capacity and then deleted. Not only is this tedious, but it often leads
+	to overallocation of memory.
+
+Testing:
+As recommended, my approach to testing was unit testing. I began by creating
+and testing my constructors, as without these, most member functions cannot be
+tested. Next, I created and tested all of the easy member functions that would
+not require private helper functions. Then I created and tested my private
+helper functions. Since these are private, I couldn't test them directly, but
+I was able to test them indirectly when I tested the remaining functions that
+were dependent upon them.

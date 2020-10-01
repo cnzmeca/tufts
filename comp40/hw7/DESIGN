@@ -1,0 +1,195 @@
+Joshua Mitchell and Christian Zinck
+HW3 Design Doc
+
+Part A Design Checklist:
+
+Representation:
+
+A 2D blocked array containing elements of any type with a provided size.
+
+Functions:
+
+ - UArray2b_T UArray2b_new(int width, int height, int size, int blocksize) 
+   returns a new 2D blocked array of the given dimensions and sizes. CRE when
+   any input is < 1.
+ - UArray2b_T UArray2b_new_64K_block(int width, int height, int size)
+   returns a new 2D blocked array of the given dimensions with blocksize equal
+   to the largest possible value such that a block is no larger than 64KB. CRE
+   when any input is < 1.
+ - void *UArray2b_at(UArray2b_T arr, int col, int row)
+   returns a reference to the cell at the given location. CRE when index out of
+   bounds
+ - void UArray2b_free(UArray2b_T *arr)
+   frees the memory allocated for the given blocked array
+ - int UArray2b_height(UArray2b_T arr)
+   returns the height of the blocked array
+ - int UArray2b_width(UArray2b_T arr)
+   returns the width of the blocked array
+ - int UArray2b_size(UArray2b_T arr)
+   returns the size of an cell in the blocked array
+ - int UArray2b_blocksize(UArray2b_T arr)
+   returns the side length of a block in the blocked array
+ - void UArray2b_map(UArray2b_T arr, void apply(int col, int row,
+                      UArray2b_T arr, void *elem, void *cl), void *cl);
+   applies the apply function to every cell in block major order (visits every
+   cell in a block before moving to another)
+ - int get_1D_pos(UArray2b_T arr, int col, int row)
+   returns the 1D position given a 2D position in the blocked array
+
+ NOTE: passing a NULL UArray2b_T to any function is a CRE.
+
+Examples:
+
+  UArray2b_T array = UArray2b_new(16, 16, 8, 4); // Creates a new array
+  int width = UArray2b_width(array); // width has value 16
+  int height = UArray2b_height(array); // height has value 16
+  int size = UArray2b_size(array); // size has value 8
+  int blocksize = UArray2b_size(array); // blocksize has value 4
+  UArray2b_free(&array); // frees memory allocated for array
+
+Representation Invariants:
+
+Our representation is a 2D unboxed blocked array
+
+ - The number of bytes in a block is blocksize * blocksize * size
+ - Each position in the array can be accessed with the function
+
+      F(r,c) = ((r-1) * NUM_ROWS) + c
+ 
+ - Given a cell at index (i, j), it is in block (i / blocksize, j / blocksize)
+   and it is at index (blocksize * (i % blocksize) + j % blocksize) within that
+   block
+
+Object Representation:
+
+ - Our representation is a single 1D array but conceptually it functions as a
+   2D array.
+ - To get the 2D position (r,c) from the 1D index x in the array use the
+   functions
+
+      r = x / NUM_COLUMNS
+      c = x % NUM_COLUMNS
+
+Test Cases:
+
+ - If 0 is passed into UArray2b_new as width, height, size, or blocksize, then a
+   checked runtime error will occur.
+ - If NULL is passed into any function as UArray2b_T arr, then a checked runtime
+   error will occur.
+ - If a row number or column number is passed into UArray2b_at that is not
+   within the bounds of the array provided, then a checked runtime error will
+   occur.
+ - If UArray2b_new_64K_block is called with 320 as width, 320 as height and 64
+   as size, then a new UArray2b_T will be returned with blocksize 32, resulting
+   in a 10x10 block array.
+ - If UArray2b_at is called with a (16, 16, 8, 4) array as arr, 0 as col, and 0
+   as row, then a pointer to the cell at (0, 0) in the array will be returned.
+ - If UArray2b_map is called with a function that prints to stdout the contents
+   of the cell at a given position, then the contents of every cell will be
+   printed to stdout in block major order.
+
+Programming Idioms:
+
+ - The idiom for handling void * values of known type
+ - All the idioms for using unboxed arrays
+
+________________________________________________________________________________
+
+Part C Design Checklist
+
+Problem:
+
+Create a program that can perform a variety of transformations on an image.
+
+Examples:
+        Call: ./ppmtrans image.ppm -row-major -rotate 90
+        Output: image.ppm read in row major and rotated 90 degrees clockwise
+
+        Call: ./ppmtrans image.ppm -col-major -flip vertical
+        Output: image.ppm read in col major and reflected vertically
+
+        Call: ./ppmtrans image.ppm -block-major -transpose
+        Output: image.ppm read in block major and transposed
+
+Subproblems:
+        Reading in ppm file in given order
+                - use correct mapping function to store in array
+                - utilize pnm.h read function
+        Transform the image based on the options
+                - implement generic rotate function
+                - implement generic reflection function
+                - implement timing function
+        Writing the transformed image
+                - use correct mapping function to write array to stdout
+                - utilize pnm.h write and free functions
+
+Abstractions:
+        Rotations and reflections can be combined into one function each in
+        which the arguments of the functions determine which degree of rotation
+        or which action of reflection.
+
+        Mapping functions allow us to apply the same function to the same image
+        in 3 different ways: row-major, column-major, and block-major
+
+Invariants:
+        - If an image of size w x h is rotated 90 degrees pixel (i, j) becomes
+          pixel (h - j - 1, i).
+        - If an image of size w x h is rotated 180 degrees pixel (i, j) becomes
+          pixel (w - i - 1, h - j - 1)
+        - If an image of width w is flipped horizontally pixel (i, j) becomes
+          pixel (w - i - 1, j)
+        - If an image of height h is flipped vertically pixel (i, j) becomes
+          pixel (i, h - j - 1)
+        - If an image of size w x h is transposed pixel (i, j) becomes
+          pixel (j, i)
+        - The number pixels in the input image will be the same as the output
+
+Algorithms:
+        Our algorithm for processing the transformation will be to pass the
+        transformation, as defined by the corresponding invariant for that
+        transformation, into the correct mapping function as defined by the
+        command line option.
+
+ADTs:
+
+        UArray2 - An unboxed 2D array that can hold an element of a given size.
+                  A UArray2 struct can be mapped through in row major or column
+                  major order.
+        UArray2b - Similar to a UArray2, a UArray2b is an unboxed 2D array, the
+                   difference being that it is broken up into blocks, which
+                   allows its elements to be mapped to in block major order.
+
+Test Cases:
+ - If the file provided is not in ppm format, a CRE will occur. 
+ - If the file provided is unable to be opened, a CRE will occur.
+ - If the file provided is unable to be read, a CRE will occur.
+ - If -rotate 0 is given, the following transformation will occur:
+   1 0 0    1 0 0
+   0 1 0 -> 0 1 0 
+   1 1 1    1 1 1
+ - If -rotate 90 is given, the following transformation will occur:
+   1 0 0    1 0 1
+   0 1 0 -> 1 1 0
+   1 1 1    1 0 0
+ - If -rotate 180 is given, the following transformation will occur:
+   1 0 0    1 1 1
+   0 1 0 -> 0 1 0
+   1 1 1    0 0 1
+ - If -rotate 270 is given, the following transformation will occur:
+   1 0 0    0 0 1
+   0 1 0 -> 0 1 1
+   1 1 1    1 0 1
+ - If -flip horizontal is given, the following transformation will occur:
+   1 0 0    0 0 1
+   0 1 0 -> 0 1 0
+   1 1 1    1 1 1
+ - If -flip vertical is given, the following transformation will occur:
+   1 0 0    1 1 1
+   0 1 0 -> 0 1 0
+   1 1 1    1 0 0
+ - If -transpose is given, the following transformation will occur:
+   1 0 0    1 0 1
+   0 1 0 -> 0 1 1
+   1 1 1    0 0 1
+ - If -time data.txt is given, the timing data for the program will be stored in
+   data.txt

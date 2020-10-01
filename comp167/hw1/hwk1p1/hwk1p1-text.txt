@@ -1,0 +1,10 @@
+Christian Zinck
+hwk1p1
+9/20/18
+
+To solve this problem, I read in the data from the given text files and parsed
+them into two matrices. For each column in the test matrix, I calculated the
+distance between that column and every column in the train matrix. I sorted
+the distances and found which was closest(1NN) and out of the 3 closest, which
+won the majority vote(3NN).
+

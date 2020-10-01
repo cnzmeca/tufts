@@ -1,0 +1,10 @@
+The genome of my individuals is a boolean array of length 7, each boolean gene representing whether
+or not the corresponding box is in the knapsack.
+
+The fitness is determined by the sum of the importances of the boxes, minus 1 for every 5 pounds
+over the weight limit.
+
+The fringe operations, mutation and crossover, are defined as adding/removing a box and swapping 2
+boxes respectively.
+
+Run command: python knapsack.py

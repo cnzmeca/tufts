@@ -1,0 +1,68 @@
+Christian Zinck and Phong Hoang
+Assignment 6: UM
+README
+
+We discussed the assignment with classmates and received help from TAs.
+
+Everything has been correctly implemented.
+
+In our design doc, we neglected to adequately describe how we would handle
+identifiers, but we chose to implement an unused_ids stack. Every time a segment
+is unmapped, its id is pushed to the stack, and when a segment is mapped, if the
+stack is not empty, an id is popped from the stack and used as the id for the
+new segment.
+
+Our architecture is comprised of three modules: um, segment, and operations.
+um contains the main function loop and parses words and routes functions. The UM
+ADT is defined in um and its data members are unknown to the other modules.
+segment contains the functions pertaining to segment manipulation. The Segment
+ADT is defined in segment and its data members are unknown to other modules.
+operations contains functions that deal solely with registers. The functions
+defined in segment and operations are called via switch statement in um.
+
+Our UM executes 50 million instructions in 2.9 seconds. We know this
+because test_time produces a um file with 50 million instruction calls and
+it runs in 2.9 seconds on our UM.
+
+test_halt - Ensures halt works by verifying that the program terminates with
+	exit success and produces no output.
+test_io - Ensures input and output work by feeding it a character on standard in
+	and verifying the same character is printed to standard out.
+test_lv - Ensures load_val works by loading a value into a register and printing
+	it to standard out.
+test_add - Ensures add works by adding two numbers and printing the result to
+	standard out.
+test_addmod - Ensures the modulus component of add works by adding two numbers
+	with sum greater than 2^32 and printing the result to standard out.
+test_mult - Ensures multiply works by multiplying two numbers and printing the
+	result to standard out.
+test_multmod - Ensures the modulus component of multiply works by multiplying
+	two numbers with product greater than 2^32 and printing the result to
+	standard out.
+test_div - Ensures divide works by dividing two numbers and printing the result
+	to standard out.
+test_nand - Ensures nand works by nanding two numbers and adjusting the number
+	to be smaller than 255 using arithmetic and printing the result to
+	standard out.
+test_cmovf - Ensures the false case of cond_move works by trying to move the
+	content of a one register to another and verifying the move failed by
+	printing the target register's contents to standard out.
+test_cmovt - Ensures the true case of cond_move works by trying to move the
+	content of a one register to another and verifying the move succeeded by
+	printing the target register's contents to standard out.
+test_sload- Ensures Segment_load works by loading a word from segment 0, and
+	verifying that the op code is the same as the one of the loaded word.
+test_sstore - Ensures Segment_store works by storing a value, loading it back,
+	and printing it to standard out.
+test_map - Ensures Segment_map works by loading a value from the newly mapped
+	segment and verifying that it is 0.
+test_unmap - Ensures Segment unmap works by mapping, unmapping, remapping, and 
+	reunmapping a segment.
+test_lp - Ensures lp works by constructing test_io in segment 1 and loading
+	segment 1 into segment 0 and verifying the program functions the same
+	as test_io.
+test_time - Calls 50 million instructions in a UM constructed for loop
+	to test how long it takes to run.
+
+We spent about 2 hours analyzing the assignment, 5 hours preparing our design,
+and 30 hours building a working implementation.

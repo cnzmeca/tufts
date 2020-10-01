@@ -1,0 +1,15 @@
+Christian Zinck
+hwk1p5 
+9/20/18
+
+EMR2 - EMR2 is involved in mucus production and secretion, which would
+understandably be hindered by frequent smoking, as represented in the data.
+
+CLCN1 - Interestingly, CLCN1 is involved in the active transport that allows
+muscle contraction and relaxation to take place. My only guess as to how this
+could be affected by smoking is that smoking puts strain on muscles, meaning
+they require more active transport of ions to maintain the same function.
+
+CCND2 - CCND2 is involved in the regulatation of cell cycle during mitosis, and
+also phosphorylizes a tumor supressor protein Rb, making it potentially
+involved in cancer pathways.

@@ -1,0 +1,10 @@
+Christian Zinck
+hwk1p3a
+9/20/18
+
+To solve this problem, I again used nearly identical code as parts 1 and 2.
+I changed literals necessary to match the ALL vs AML problem and altered
+the math to calculate the folds to 4 groups of 10 and a group of 8.
+
+The 1NN method accurately labeled 46/48 cases (96%).
+The 3NN method accurately labeled 45/48 cases (94%).

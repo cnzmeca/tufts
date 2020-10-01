@@ -1,0 +1,57 @@
+Christian Zinck
+HW 2
+
+Assignment Purpose:
+The purpose of this assignment was to create and test a doubly linked character
+list class.
+
+Help Received:
+I did not receive any help.
+
+Files Provided:
+CharLinkedList.cpp - cpp file for the CharLinkedList class. Contains all member
+functions and data.
+CharLinkedList.h - header file for the CharLinkedList class. Contains the class
+definition.
+testCharLinkedList.cpp - test file for the CharLinkedList class. Contains unit
+testing for member functions and constructors.
+Makefile - the makefile for the project. Allows me to execute complex commands
+with simple target phrases.
+README - this file.
+
+Compilation and Execution:
+To compile the program type "make" into the command prompt.
+To execute the program type "./charLinkedList" into the command prompt.
+
+Data Structures:
+In this assignment I used a doubly linked list.
+	Pros: Adding and removing from the front and back of the list is easy.
+	Concatenation was much simpler than it was for sequences and there is 
+	no need to expand the capacity because the elements aren't adjacent in
+	memory.
+	Cons: Accessing and iterating by index is tedious. Maintaining both
+	previous and next links between elements doubles the work and memory.
+
+Testing:
+Similar to last time, I unit tested my constructors and functions one by one
+after I wrote them. I started with Constructors, then layed out my private
+helper functions, then I work on the functions that could be tested with a
+simple boolean output, and finally finished by testing the functions that
+modify the contents of the list. I tested error cases one by one at the end of
+the test script.
+
+Q1:
+Concatenation was specifically much easier because I just had to link the front
+and back pointers. In general most of the list modifying functions were easier
+because I didn't need to worry about expansion.
+
+Q2:
+It was much harder to implement elementAt, insertAt, and replaceAt because
+indices are not a part of linked lists like they are in sequences.
+
+Q3:
+Any part of the client program that uses indices would have to loop through the
+CharLinkedList until it reached the desired index. Also all expansion and
+contraction functions would be unnecessary. Finally the client program would
+have to be modfied to iterate with next and prev instead of incrementing and
+decrementing indices.

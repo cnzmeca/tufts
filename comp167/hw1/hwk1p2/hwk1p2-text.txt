@@ -1,0 +1,10 @@
+Christian Zinck
+hwk1p2
+9/20/18
+
+To solve this problem, I used nearly identical code as part 1. The only change I
+made was in the main function, in which I changed the arguments of the label
+call to match the folds for the cross validation problem.
+
+The 1NN method accurately labeled 23/30 cases (77%).
+The 3NN method accurately labeled 18/30 cases (60%).

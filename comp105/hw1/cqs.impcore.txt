@@ -1,0 +1,28 @@
+Christian Zinck
+Reading Comprehension 1
+
+1.              99
+2.              B
+3.      a.      No, primitive functions such as '+' only accept 2 arguments
+        b.      Yes, set (x 1) sets the value of x to 1 and returns 1
+4.      a.      9 - (12/3)
+        b.      (- 9 (/ 12 3))
+5.      a.      n == 0
+                n == (m + 1), where m is a natural number
+        b.      (if (< n 1)
+                        (*zero case*)
+                        (*recursive case*))
+        c.      All natural numbers except for 0
+        d.      n - 1 will be the argument of the recursive call
+6.              The contract is bad because it does not provide a domain for
+                x or n, describes how the result is obtained rather then what
+                the result is, and does not explicitly state that the value
+                calculate (x^n) will be returned.
+7.      a.      It is ok to submit the factorial function without a contract
+                because factorial can only have one meaning for a given input
+                n, namely n!, and there is a well established domain for which
+                n! is defined.
+        b.      It is not ok to submit the power function without a contract
+                because without a contract it is ambiguous if the function will
+                return x^n or n^x given inputs x and n. Additionally, the domain
+                for the power function may vary based on how it is implemented.

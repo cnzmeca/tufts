@@ -1,0 +1,190 @@
+.section init
+.zero r0
+.temps r6, r7
+
+.section text
+#Waits for character input to r4
+waiting:
+        r4 := input()
+
+#Handles character input in r4
+
+waiting_with_char:
+        r4 := ~r4
+        if (r4 == 0) goto halt_program
+        r4 := ~r4
+        r5 := jumptable + r4
+        r5 := m[r0][r5]
+        goto r5
+ 
+#Entering state that receives input from r4
+entering:
+        r4 := input()
+        .temps r5, r6, r7 
+        if(r4 <s 48) goto waiting_with_char
+        if(r4 >s 57) goto waiting_with_char
+        goto multi_digit
+
+#Prints contents of the stack
+print:
+        if (r3 == r0) goto waiting
+        m[r0][return_add] := r1
+        m[r0][stack_pointer] := r2
+        m[r0][stack_size] := r3
+        goto build_copy
+        .temps off
+        .temps r6, r7
+        goto waiting
+
+#Adds top 2 elements of stack
+add:
+        goto check2 linking r1
+        pop r4 off stack r2
+        pop r5 off stack r2
+        r4 := r5 + r4
+        push r4 on stack r2
+        r3 := r3 - 1
+        goto waiting
+
+#Subtracts top 2 elements of stack
+sub:
+        goto check2 linking r1
+        pop r4 off stack r2
+        pop r5 off stack r2
+        r4 := r5 - r4
+        push r4 on stack r2
+        r3 := r3 - 1
+        goto waiting
+
+#Multiplies top 2 elements of stack
+mul:
+        goto check2 linking r1
+        pop r4 off stack r2
+        pop r5 off stack r2
+        r4 := r5 * r4
+        push r4 on stack r2
+        r3 := r3 - 1
+        goto waiting
+
+#Divides top 2 elements of stack
+div:
+        goto check2 linking r1
+        pop r4 off stack r2
+        pop r5 off stack r2             
+        if (r4 == 0) goto div_by_zero
+        r4 := r5 / r4
+        push r4 on stack r2
+        r3 := r3 - 1
+        goto waiting
+
+#Divide error message
+div_by_zero:
+        output "You cannot divide by zero.\n"
+        goto waiting
+
+#Ors top 2 elements of stack
+or: 
+        goto check2 linking r1
+        pop r4 off stack r2
+        pop r5 off stack r2
+        r4 := r4 | r5
+        push r4 on stack r2
+        r3 := r3 - 1
+        goto waiting
+
+#Ands top 2 elements of stack
+and:
+        goto check2 linking r1
+        pop r4 off stack r2
+        pop r5 off stack r2
+        r4 := r4 & r5
+        push r4 on stack r2
+        r3 := r3 - 1
+        goto waiting
+
+#Negates top element of stack
+neg:
+        goto check1 linking r1
+        pop r4 off stack r2
+        r4 := -r4
+        push r4 on stack r2
+        goto waiting
+
+#Complements top element of stack
+comp:
+        goto check1 linking r1
+        pop r4 off stack r2
+        r4 := ~r4
+        push r4 on stack r2
+        goto waiting
+
+#Swaps top 2 elements of stack
+swap:
+        goto check2 linking r1
+        pop r4 off stack r2
+        pop r5 off stack r2
+        push r4 on stack r2
+        push r5 on stack r2
+        goto waiting
+
+#Duplicates top element of stack
+dup:
+        goto check1 linking r1
+        pop r4 off stack r2
+        push r4 on stack r2
+        push r4 on stack r2
+        r3 := r3 + 1
+        goto waiting
+
+#Deletes top element of stack
+del:
+         goto check1 linking r1
+         pop r5 off stack r2
+         r3 := r3 - 1
+         goto waiting
+
+#Zeros out the stack
+zero:
+        if(r3 == 0) goto waiting
+        pop r5 off stack r2
+        r3 := r3 - 1
+        goto zero
+
+#Adds a digit to the stack and enters entering mode
+digit:
+        r4 := r4 - 48
+        push r4 on stack r2
+        r3 := r3 + 1
+        goto entering
+
+#Adds a multidigit number to the stack 
+multi_digit:
+        pop r5 off stack r2
+        r5 := r5 * 10
+        r4 := r4 - 48
+        r4 := r5 + r4
+        push r4 on stack r2
+        goto entering
+
+#Checks if the stack has at least 1 number
+check1:
+        .temps r5, r6, r7
+        if(r3 >s 0) goto r1
+        output "Stack is empty.\n"
+        goto waiting
+
+#Checks if the stack has a least 2 numbers
+check2:
+        .temps r5, r6, r7
+        if(r3 >s 1) goto r1
+        output "Stack contains fewer than 2 numbers.\n"
+        goto waiting
+
+#Returns an error if invalid input
+input_error:
+        output "Invalid input.\n"
+        goto waiting
+
+#Halts the program
+halt_program:
+        halt

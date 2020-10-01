@@ -1,0 +1,20 @@
+Natural
+
+[m d b]
+A (self) = [(self div b) (self mod b) b]  
+I (self) = (& (<= 0 d) (> b d))
+
+I chose the immutable list representation because I wanted a well structured
+OO approach. I do not regret this choice.
+
+LargePositiveInteger
+
+[magnitude]
+A (self) = [(self magnitude)]
+I (self) = magnitude > 0
+
+LargeNegativeInteger
+
+[magnitude]
+A (self) = [(self magnitude)]
+I (self) = magnitude > 0

@@ -1,0 +1,61 @@
+div.garfield{ 
+	width:400px;
+	height:133px; 
+	background:url(garfield.gif) 600px 398px;
+}
+
+@media (max-width: 1200px){
+	div.garfield{
+		width: 200px;
+		height: 133px;
+		background:url(garfield.gif) 200px 398px;
+	}
+}
+
+@media (max-width: 1100px){
+	div.garfield{
+		width: 200px;
+		height: 133px;
+		background:url(garfield.gif) 600px 265px;
+	}
+}
+
+@media (max-width: 1000px){
+	div.garfield{
+		width: 200px;
+		height: 133px;
+		background:url(garfield.gif) 400px 265px;
+	}
+}
+
+@media (max-width: 900px){
+	div.garfield{
+		width: 200px;
+		height: 133px;
+		background:url(garfield.gif) 200px 265px;
+	}
+}
+
+@media (max-width: 800px){
+	div.garfield{
+		width: 200px;
+		height: 133px;
+		background:url(garfield.gif) 600px 132px;
+	}
+}
+
+@media (max-width: 700px){
+	div.garfield{
+		width: 200px;
+		height: 133px;
+		background:url(garfield.gif) 400px 132px;
+	}
+}
+
+@media (max-width: 600px){
+	div.garfield{
+		width: 200px;
+		height: 133px;
+		background:url(garfield.gif) 200px 132px;
+	}
+}

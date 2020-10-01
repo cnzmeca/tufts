@@ -1,0 +1,16 @@
+Christian Zinck
+
+mov - uses conditional move where condition is always true
+
+com - nands the value to be complemented with itself which is equivalent using
+nand logic
+
+neg - takes the complement of the value to be negated and adds 1
+
+sub - adds the minuend to the complement of the subtrahend
+
+and - nands the values to be anded and takes the complement, which is equivalent
+using nand logic
+
+or - takes the complement of the values to be ored and nands them, which is
+equivalent with using logic

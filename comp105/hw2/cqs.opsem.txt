@@ -1,0 +1,17 @@
+Christian Zinck
+Comprehension Questions 2
+9/18/18
+
+1.      F
+2.      C
+3.      B
+4.      D
+5.      E
+6.      E
+7.      A
+8.      2, IFTRUE and IFFALSE
+9.      5 rules in the textbook have APPLY in the conclusion, but each primitive
+        function has a rule that has an APPLY in the conclusion and the
+        APPLYUSER rule also has an apply in the conclusion.
+10.     APPLYEQTRUE if n = 0 or APPLYGT if n > 0 or APPLYLT if n < 0
+11.     APPLYEQTRUE if n = 10 or APPLYEQFALSE if n != 10

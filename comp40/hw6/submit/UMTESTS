@@ -1,0 +1,17 @@
+test_halt.um
+test_io.um
+test_lv.um
+test_add.um
+test_addmod.um
+test_mult.um
+test_multmod.um
+test_div.um
+test_nand.um
+test_cmovf.um
+test_cmovt.um
+test_sload.um
+test_sstore.um
+test_map.um
+test_unmap.um
+test_lp.um
+test_time.um

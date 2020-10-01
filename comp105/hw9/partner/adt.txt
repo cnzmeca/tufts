@@ -1,0 +1,59 @@
+type bigint = N.nat * bool
+
+(*
+ * abstraction n = (n, true) where n is a positive integer
+ * abstraction n = (n, false) where n is a negative integer
+ *)
+
+fun invariant (i, s) = if (N.compare (i, N.ofInt 0)) = LESS then false else true
+
+I wanted to have easy access to the sign for the logic related to sign in +, -
+and *.
+-------------------------------------------------------------------------------
+type nat = int list
+
+(*
+ * abstraction 0 = []
+ * abstraction d = [d] where d < b
+ * abstraction d = (d mod b) :: abstraction (d div b)
+ *)
+
+fun invariant [] = true
+|   invariant (d::[]) =
+        if (d = 0) then false
+        else true
+|   invariant (d::n) = (invariant n)
+
+I wanted my representation to be little-endian so I could implement + and -
+easier.
+-------------------------------------------------------------------------------
+datatype move = Q of int | D of int | N of int
+
+(*
+ * My move abstraction function maps a move to a datatype which has subtypes
+ * Q, D, and N, for each denomination, all of which require an interger for
+ * how many of that coin will be taken
+ *)
+
+fun invariant (Q n) = if (n >= 1) then true else false
+|   invariant (D n) = if (n >= 1) then true else false
+|   invariant (N n) = if (n >= 1) then true else false
+
+I wanted different subtypes for each coin denomination so I could distinguish
+the moves using pattern matching.
+-------------------------------------------------------------------------------
+
+type state = Player.player * (int * int * int)
+
+(*
+ * My state abstraction function maps a game state onto a 2-tuple containing
+ * a player and a 3-tuple containing 3 integers, one for each coin denomination
+ *)
+
+fun invariant (p, (qs, ds, ns)) =
+        if ((p = Player.X orelse p = Player.O) andalso (qs >= 0) andalso
+                (ds >= 0) andalso (ns >= 0)) then true
+        else false
+
+I wanted to include all the state data in a tuple, but I wanted the option to
+not have to type out the coin denominations during pattern matching.

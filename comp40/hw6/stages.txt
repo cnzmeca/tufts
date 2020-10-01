@@ -1,0 +1,31 @@
+baseline:
+	midmark - 2.61s 	1.000	1.000 	(2.0219 x 10^10 instructions)
+	advent - 22.33s		1.000	1.000
+	sandmark - 64.98s	1.000	1.000
+
+stage 1: compiling with O2
+	midmark - 2.24s 	.858	.858	(1.8615 x 10^10 instructions)
+	advent - 20.17s		.903	.903
+	sandmark - 55.76s	.858	.858
+
+stage 2: restructured main loop variables and masks
+	midmark - 2.06s		.789	.920	(1.521 x 10^10 instructions)	
+	advent - 18.45s		.826	.915
+	sandmark - 51.63s	.795	.926
+
+stage 3: removed run_op function, did all arithmetic from operations in
+main function, and converted switch statement to priority if-else tower
+	midmark - 1.66s		.636	.806	(1.282 x 10^10 instructions)
+	advent - 13.75s		.616	.745
+	sandmark - 41.35s	.636	.801
+
+stage 4: implemented sequence adt and replaced all Hanson sequences and adjusted
+um and segment to expect sequence to store uint32_t* instead of void*.
+	midmark - .50s		.192	.301	(4.968 x 10^9 instructions)
+	advent - 4.25s		.190	.309
+	sandmark - 12.62s	.194	.305
+
+stage 5: moved Segment load and store into main.
+	midmark - .32s		.123	.640	(3.515 x 10^9 instructions)
+	advent - 2.61s		.117	.614
+	sandmark - 7.94s	.122	.630

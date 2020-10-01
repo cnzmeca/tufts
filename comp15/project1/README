@@ -1,0 +1,45 @@
+Christian Zinck
+Project 1
+
+Purpose:
+The purpose of this program is to create a working RPN calculator.
+
+Help Received:
+I did not receive any help with this assignment.
+
+Files Submitted:
+DatumStack.h - header file for DatumStack class. Contains class definition.
+DatumStack.cpp - cpp file for DatumStack class. Contains member functions and
+	data.
+testDatumStack.cpp - test file for DatumStack class.
+RPNCalc.h - header file for RPNCalc class. Contains class definition.
+RPNCalc.cpp - cpp file for RPNCalc class. Contains member functions and data.
+testRPNCalc.cpp - test file for RPNCalc class.
+main.cpp - main file for running calculator.
+Makefile - contains target phrase commands for compiling and providing.
+README - this file.
+
+Compilation and Execution:
+To compile this program type "make" into your command prompt.
+To execute this program type "./CalcYouLater" into your command prompt.
+
+Data Structures:
+To implement the stack I used a sequence. I chose to use a sequence because it
+is much easier to clear the stack and determine the size of the stack using a
+sequence than it is to do so using a linked list. A stack is necessary for an
+RPN calculator because the way the calculator works is by performing the
+operation on the most recently added data. A stack excels at accessing the most
+recently added data because of its FIFO nature. None of my algorithms were
+particularly complex, but I did enjoy writing the exec command because I learned
+about istringstream variables to complete it.
+
+Testing:
+To test the DatumStack class I unit tested each function and compared the actual
+results to the results that would result from a correct implementation. I
+tested all functions on both empty and nonempty stacks and checked both error
+cases. To test the RPNCalc class I took a different approach. Since all of
+the commands are dependent on cin and the only nonprivate function is run(), my
+testRPNCalc.cpp was identical to my main.cpp. Although there is no way to show
+it I unit tested all of the commands. I used the following in a file to test
+the file command:
+4 5 - 6 * print

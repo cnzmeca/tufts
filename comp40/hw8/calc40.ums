@@ -1,0 +1,100 @@
+.section init
+.zero r0
+.temps r1, r6, r7
+
+jumptable:
+	.space 256
+	r5 := 0
+errors:
+	r6 := jumptable + r5
+	m[r0][r6] := input_error
+	r5 := r5 + 1
+	if (r5 <s 256) goto errors
+	r5 := 48
+digits:
+	r6 := jumptable + r5
+	m[r0][r6] := digit
+	r5 := r5 + 1
+	if (r5 <s 58) goto digits
+functions:
+	m[r0][jumptable + ' '] := waiting
+	m[r0][jumptable + '\n'] := print
+	m[r0][jumptable + '+'] := add
+	m[r0][jumptable + '-'] := sub
+	m[r0][jumptable + '*'] := mul
+	m[r0][jumptable + '/'] := div
+	m[r0][jumptable + '|'] := or
+	m[r0][jumptable + '&'] := and
+	m[r0][jumptable + 'c'] := neg
+	m[r0][jumptable + '~'] := comp
+	m[r0][jumptable + 's'] := swap
+	m[r0][jumptable + 'd'] := dup
+	m[r0][jumptable + 'p'] := del
+	m[r0][jumptable + 'z'] := zero
+
+.section text
+waiting:
+        r4 := input()
+
+waiting_with_character:
+        r4 := ~r4
+	if (r4 == 0) goto halt_program
+        r4 := ~r4
+        r5 := jumptable + r4
+        r5 := m[r0][r5]
+        output "hi"
+	goto r5
+
+print:
+	if (r3 == r0) goto waiting
+
+add:
+	goto check2 linking r1
+	
+
+sub:
+
+mul:
+
+div:
+
+or:
+
+and:
+
+neg:
+
+comp:
+
+swap:
+
+dup:
+
+del:
+
+zero:
+
+entering:
+
+digit:
+	r4 := r4 - 48
+	push r4 on stack r2
+	r3 := r3 + 1
+	goto entering
+
+input_error:
+	output "Invalid input.\n"
+	goto waiting
+
+check1:
+	if(r3 >=s 1) goto r1
+	output "Stack is empty.\n"
+	goto waiting
+
+check2:
+	if(r3 >=s 2) goto r1 
+	output "Stack has fewer than 2 numbers.\n"
+	goto waiting
+
+halt_program:
+	halt

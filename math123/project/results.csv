@@ -1,0 +1,2 @@
+,split0_test_rmse,split1_test_rmse,split2_test_rmse,mean_test_rmse,std_test_rmse,rank_test_rmse,mean_fit_time,std_fit_time,mean_test_time,std_test_time,params,param_k,param_sim_options['name'],param_sim_options['user_based']
+0,1.0005838113750154,1.0044568715522635,1.004527937970943,1.0031895402994073,0.001842756997820659,1,0.17883809407552084,0.0028388117819799865,4.143129269282023,0.08862593859603313,"{'k': 100, ""sim_options['name']"": 'MSD', ""sim_options['user_based']"": True}",100,MSD,True

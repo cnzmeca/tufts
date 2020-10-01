@@ -1,0 +1,25 @@
+Joshua Mitchell and Christian Zinck
+HW3 Estimates
+
+90-degree rotation
+        row-major - 4
+        column-major - 4
+        block-major - 1
+
+180-degree rotation
+        row-major - 1
+        column-major - 6
+        block-major - 1
+
+There are two things to consider when estimating the hit rate of a rotation
+using a given mapping order: the locality of the data before the rotation, and
+the locality of the data after the rotation. Block major for both rotations and
+row major for a 180 degree rotation all have their data stored contiguously in
+memory before and after the rotation, meaning they will have the highest hit
+rate. Row major for a 90 degree rotation will have its data stored contiguously
+in memory before the rotation, but not after. Conversely, column major for a 90
+degree rotation will have its data stored noncontiguously in memory before the
+rotation, but contiguously after. Therefore, they will have similar and lower
+hit rates than the aforementioned operations. Finally, column major for a 180
+degree rotation will have its data stored noncontiguously before and after the
+rotation, meaning it will have the lowest hit rate of all the operations

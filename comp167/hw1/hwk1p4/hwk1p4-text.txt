@@ -1,0 +1,15 @@
+Christian Zinck
+hwk1p4
+9/20/18
+
+To solve the hierarchical problem I used the same method as in part 3b, but
+I appended the two data sets together before clustering.
+
+To solve the kmeans problem, I again used the same method as in part 3c, but
+appended the data sets before clustering.
+
+I found it more difficult to assign labels to the combined data set using
+clustering than the separate sets using nearest neighbours. The clustering
+algorithms didn't seem to want to produce 2 substantial clusters, so I had
+to fiddle with distances and methods in order to get results, which I
+attribute to the rather broad range of current smokers.

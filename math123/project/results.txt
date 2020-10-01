@@ -1,0 +1,50 @@
+ML-100K
+
+KNN
+
+Biased accuracy on train:
+RMSE: 0.8557
+MAE:  0.6744
+Unbiased accuracy on test:
+RMSE: 0.9978
+MAE:  0.7919
+
+SVD
+
+Biased accuracy on train:
+RMSE: 0.8027
+MAE:  0.6390
+Unbiased accuracy on test:
+RMSE: 0.9126
+MAE:  0.7251
+
+ML-1M
+  
+KNN
+
+Biased accuracy on train:
+RMSE: 0.7562
+MAE:  0.5833
+Unbiased accuracy on test:
+RMSE: 0.9221
+MAE:  0.7268
+
+SVD
+
+Biased accuracy on train:
+RMSE: 0.7058
+MAE:  0.5607
+Unbiased accuracy on test:
+RMSE: 0.8468
+MAE:  0.6665
+
+Jester
+
+SVD
+
+Biased accuracy on train:
+RMSE: 2.4695
+MAE:  1.8158
+Unbiased accuracy on test:
+RMSE: 4.0719
+MAE:  3.0373

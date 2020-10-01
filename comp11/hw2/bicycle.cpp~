@@ -1,0 +1,60 @@
+/*
+Christian Zinck
+COMP11
+HW 2
+Programming #2
+February 9, 2017
+*/
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	const int MAX_VALUE = 1000;
+
+	const int WHEELS_NEEDED = 2;
+	const int FRAMES_NEEDED = 1;
+	const int LINKS_NEEDED = 50;
+	
+	int numWheels, numFrames, numLinks, numBikes;
+
+	cout << "How many wheels do you have?" << endl;
+	cin >> numWheels;
+	if (numWheels < 0 || numWheels > MAX_VALUE)
+	{
+		cout << "You do not actually have that many wheels. I will assume you have enough wheels for 1 bike." << endl;
+		numWheels = WHEELS_NEEDED;
+	}
+	cout << "You have enough wheels for " << (numWheels / WHEELS_NEEDED) << " bikes." << endl;
+
+	cout << "How many frames do you have?" << endl;
+	cin >> numFrames;
+	if (numFrames < 0 || numFrames > MAX_VALUE)
+        {
+                cout << "You do not actually have that many frames. I will assume you have enough frames for 1 bike." << endl;
+       		numFrames = FRAMES_NEEDED;
+	}
+	cout << "You have enough frames for " << (numFrames / FRAMES_NEEDED) << " bikes." << endl;	
+
+	cout << "How many links do you have?" << endl;
+	cin >> numLinks;
+	if (numLinks < 0 || numLinks > MAX_VALUE)
+        {
+                cout << "You do not actually have that many links. I will assume you have enough links for 1 bike." << endl;
+		numLinks = LINKS_NEEDED;
+        }
+	cout << "You have enough links for " << (numLinks / LINKS_NEEDED) << " bikes." << endl;
+
+	numBikes = numWheels / WHEELS_NEEDED;
+
+	if ((numFrames / FRAMES_NEEDED) < numBikes)
+		numBikes = numFrames / FRAMES_NEEDED;
+
+	if ((numLinks / LINKS_NEEDED) < numBikes)
+                numBikes = numLinks / LINKS_NEEDED;
+	
+	cout << "I can make you " << numBikes << " bike(s) with " << (numWheels % WHEELS_NEEDED) << " wheels, " <<
+	(numFrames % FRAMES_NEEDED) << " frames, and " << (numLinks % LINKS_NEEDED) << " links left over for me to keep." << endl;
+	return 0;
+}

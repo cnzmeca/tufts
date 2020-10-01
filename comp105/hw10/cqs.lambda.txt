@@ -1,0 +1,45 @@
+Christian Zinck
+CQs 10
+11/30/18
+
+1.
+datatype term = VAR of string | LAR of string * term | APP of term * term
+
+2.
+a.
+Beta and eta
+b.
+Beta
+c.
+Beta    \x.M N
+Eta     \x.(F x)
+d. 
+Beta    \x.M y = M[x:=y]
+        \x.M \y.N = M[x:=\y.N]
+        \x.M (N O) = M[x:=(N O)]
+
+Eta
+        \x.(y x) = y
+        \x.(\y.z x) = \y.z
+        \x.((y z) x) = (y z)
+
+3.
+(\n.(n(\z.NONZERO))ZERO)(\f.\x.f x)
+(\n.(n(\z.NONZERO))ZERO)(\f.f)
+(\n.(n(\z.NONZERO))ZERO)(f)
+((f)(\z.NONZERO))ZERO)
+(f NONZERO)
+
+4.
+Beta    \x.M N = M[x:=N]
+Eta     \x.(F x) = F
+
+5.
+(\x.x (y z)
+
+6.
+a.      No
+b.      0
+c.      No
+d.      1
+e.      No

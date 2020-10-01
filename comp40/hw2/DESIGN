@@ -1,0 +1,155 @@
+Joshua Mitchell and Christian Zinck
+HW2 Design Doc
+
+Part A Design Checklist:
+
+Representation:
+
+A 2D array containing elements of any type with a provided size.
+
+Functions:
+
+ - UArray2_T UArray2_new(int DIM1, int DIM2, int ELEM_SIZE) returns a new 2D
+   array of the given dimensions and element size.
+ - void *UArray2_at(UArray2_T arr, int row, int col) returns a reference
+   to the element at the given location.
+ - void UArray2_map_col_major(UArray2_T arr, void apply(int DIM1, int DIM2,
+   UArray2_T arr, void *value, void *cl), void *cl) maps the apply function
+   to all the elements in column major order
+ - void UArray2_map_row_major(UArray2_T arr, void apply(int DIM1, int DIM2,
+   UArray2_T arr, void *value, void *cl), void *cl) maps the apply function
+   to all the elements in row major order
+ - void UArray2_free(UArray2_T *arr) frees the memory allocated for the given
+   array
+ - int UArray2_height(UArray2_T arr) returns the height of the array
+ - int UArray2_width(UArray2_T arr) returns the width of the array
+ - int UArray2_size(UArray2_T arr) returns the size of an element in the array
+ - int get_1D_pos(UArray2_T arr, int row, int col) returns the 1D position 
+   given a 2D position in the array
+
+Examples:
+
+  UArray2_T array = UArray2_new(5, 5, 8); // Creates a new array
+  int width = UArray2_width(array); // width has value 5
+  int height = UArray2_height(array); // height has value 5
+  int size = UArray2_size(array); // size has value 8
+  UArray2_free(&array); // frees memory allocated for array
+
+Representation Invariants:
+
+Our representation is a 2D unboxed array
+
+ - Each successive element is "element size" bytes away from the previous
+   element
+ - Each position in the array can be accessed with the function
+
+      F(r,c) = ((r-1) * NUM_ROWS) + c
+
+Object Representation:
+
+ - Our representation is a single 1D array but conceptually it functions as a
+   2D array.
+ - To get the 2D position (r,c) from the 1D index x in the array use the 
+   functions
+
+      r = x / NUM_COLUMNS
+      c = x % NUM_COLUMNS
+
+Test Cases:
+
+ - Passing in 0 for either of the dimension sizes or the element size
+   Case: UArray2_T arr = UArray2_new(5,0,8);
+   Expectation: Error - width cannot be equal to 0.
+ - Setting an element equal to NULL
+   Case: UArray2_T arr = UArray2_new(5,5,8);
+         int *num = UArray2_at(4,4);
+         *num = NULL;
+   Expectation: The element at the index 24 should be NULL
+ - Accessing an element in the array that's out of bounds
+   Case: UArray2_T arr = UArray2_new(4,4,8);
+         int *num = UArray2_at(4,4);
+   Expectation: Error - accessing element out of bounds
+
+Programming Idioms:
+
+ - The idiom for void**
+ - The idiom for handling void * values of known type
+ - All the idioms for using unboxed array
+_______________________________________________________________________________
+
+Part B Design Checklist:
+
+Representation:
+
+A 2D array containing bits
+
+Functions:
+
+ - Bit2_T Bit2_new(int DIM1, int DIM2) returns a new 2D
+   array of the given dimensions and element size.
+ - int Bit2_get(Bit2_T arr, int row, int col) returns the bit at the given
+   position in the array
+ - int Bit2_put(Bit2_T arr, int row, int col, int value) assigns value to
+   the bit at the given position in the array
+ - void Bit2_map_col_major(Bit2_T arr, void apply(int DIM1, int DIM2,
+   Bit2_T arr, int value, void *cl), void *cl) maps the apply function
+   to all the elements in column major order
+ - void Bit2_map_row_major(Bit2_T arr, void apply(int DIM1, int DIM2,
+   Bit2_T arr, int value, void *cl), void *cl) maps the apply function
+   to all the elements in row major order
+ - void Bit2_free(Bit2_T *arr) frees the memory allocated for the given
+   array
+ - int Bit2_height(Bit2_T arr) returns the height of the array
+ - int Bit2_width(Bit2_T arr) returns the width of the array
+ - int get_1D_pos(Bit2_T arr, int row, int col) returns the 1D position
+   given a 2D position in the array
+
+
+Examples:
+
+  Bit2_T array = Bit2_new(5, 5, 8); // Creates a new array
+  int width = Bit2_width(array); // width has value 5
+  int height = Bit2_height(array); // height has value 5
+  Bit2_free(&array); // frees memory allocated for array
+
+Representation Invariants:
+
+Our representation is a 2D unboxed array
+
+ - Each successive element is 1 bit away from the previous
+   element
+ - Each position in the array can be accessed with the function
+
+      F(r,c) = ((r-1) * NUM_ROWS) + c
+
+Object Representation:
+
+ - Our representation is a single 1D array but conceptually it functions as a
+   2D array.
+ - To get the 2D position (r,c) from the 1D index x in the array use the 
+   functions
+
+      r = x / NUM_COLUMNS
+      c = x % NUM_COLUMNS
+
+Test Cases:
+
+ - Passing in 0 for either of the dimension sizes
+   Case: Bit2_T arr = Bit2_new(5,0);
+   Output: Error - width cannot be equal to 0.
+ - Setting an element equal to NULL
+   Case: Bit2_T arr = Bit2_new(5,5,8);
+         int *num = Bit2_at(4,4);
+         *num = NULL;
+   Expectation: The element at the index 24 should be NULL
+ - Accessing an element in the array that's out of bounds
+   Case: Bit2_T arr = Bit2_new(4,4,8);
+         int *num = Bit2_at(4,4);
+   Expectation: Error - accessing element out of bounds
+
+Programming Idioms:
+
+ - The idiom for void**
+ - The idiom for handling void * values of known type
+ - All the idioms for using unboxed array
+

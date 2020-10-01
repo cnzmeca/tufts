@@ -1,0 +1,51 @@
+Christian Zinck and Joshua Mitchell
+
+We discussed the assignment with classmates and received help from TAs.
+
+All required features have been correctly implemented with the addition of 270
+degree rotation.
+
+Architecture:
+The main function in ppmtrans.c handles the command line arguments, keeping a
+record of all options and filenames. It then reads the image from stdin or the
+given file name and stores it in a Pnm_ppm with data member A2Methods_UArray2,
+a polymorphic type that represents either a UArray2 or UArray2b. A UArray2 is
+implemented as a UArray of UArrays and UArray2b is implemented as a UArray2 of
+UArrays. Transform is then called on the image, which maps through the image in
+the given or default mapping order and uses the rotate function to rotate each
+pixel according to the given degree, defaulted to 0. The resulting image is
+then printed to stdout.
+
+Part E: 
+Command used: djpeg /comp/40/images/from-wind-cave.jpg | pnmscale 15 |
+./ppmtrans -rotate <degree> -<row, col, block>-major -time timedata.txt |
+display &
+
+Image size: 84088800 pixels
+
+Row Major - 
+90: 3290829868 ns, 39.135175 ns per pixel, 39.135175 instructions per pixel
+180: 2215625167 ns, 26.348636 ns per pixel, 26.348636 instructions per pixel
+
+Column Major -
+90: 9451686383 ns, 112.401252 ns per pixel, 112.401252 instructions per pixel
+180: 10184523974 ns, 121.116296 ns per pixel, 121.116296 instructions per pixel
+
+Block Major - 
+90: 4939296245 ns, 58.739050 ns per pixel, 58.739050 instructions per pixel
+180: 5079640641 ns, 60.408052 ns per pixel, 60.408052 instructions per pixel
+
+Analysis - 
+Row major executed the rotation, regardless of degree or image size, because
+rows in a UArray2 are stored contiguously in memory. The blocks in UArray2b are
+also stored contiguously in memory, however several operations are required to
+access each element in a UArray2b, making block major slower than row major.
+Finally, column major executes the operations the slowest because the columns
+in UArray2 are stored noncontiguously.
+
+Model: D11S
+Name: LAB116-N
+CPU type: Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz
+Clock rate: 899.937
+
+We spent approximately 40 hours on this assignment.

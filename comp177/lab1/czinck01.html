@@ -1,0 +1,134 @@
+<DOCTYPE html>
+<html>
+<head>
+	<script lang="javascript" src="js/jquery-3.1.0.min.js"></script>
+	<script lang="javascript" src="js/d3.min.js"></script>
+	<style>
+		html, body {
+			padding: 0;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	
+	<script>
+		var d = 500;
+
+		var svg = d3.select('body').append('svg')
+			.attr('width', d)
+			.attr('height', d)
+			.style('background-color', 'black');
+
+		/*
+		 * Christian Zinck
+		 * Refract
+		 */
+
+        var drawn = false;
+
+		svg.style('background-color', 'black');
+
+		var t1 = svg.append("polygon")
+            .attr("id", "t1")
+			.attr("points", .3*d + "," + .673*d + " " + .5*d + "," + .327*d + " " + .7*d + "," + .673*d)
+			.attr("stroke-width", .004*d + "px")
+            .attr("stroke", "white");
+        
+        var ray = svg.append("line")
+            .attr("id", "ray")
+            .attr("x1", 0)
+            .attr("y1", .65*d)
+            .attr("x2", .4*d)
+            .attr("y2", .5*d)
+            .attr("stroke-width", .004*d + "px")
+            .attr("stroke", "white")
+            .attr("stroke-opacity", "0");
+
+
+        var grad = svg.append("svg:defs")
+            .append("svg:linearGradient")
+            .attr("id", "grad")
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "100%")
+            .attr("y2", "0%")
+            .attr("spreadMethod", "pad");
+
+        var stop1 = grad.append("svg:stop")
+            .attr("offset", "0%")
+            .attr("stop-color", "white")
+            .attr("stop-opacity", "0");
+
+        var stop2 = grad.append("svg:stop")
+            .attr("offset", "100%")
+            .attr("stop-color", "black")        
+            .attr("stop-opacity", "0");
+
+        var t2 = svg.append("polygon")
+            .attr("id", "t2")
+            .attr("points", .4*d + "," + .5*d + " " + .5643*d + "," + .4385*d + " " + .6357*d + "," + .5615*d)
+            .attr("fill", "url(#grad)");
+       
+        var b1 = svg.append("polygon")
+            .attr("id", "b1")
+            .attr("points", .5663*d + "," + .4385*d + " " + .5782*d + "," + .4590*d + " " + d + "," + .5261*d + " " + d + "," + .5*d)
+            .attr("fill", "red")
+            .attr("fill-opacity", "0");
+ 
+        var b2 = svg.append("polygon")
+            .attr("id", "b2")
+            .attr("points", .5782*d + "," + .4590*d + " " + .5901*d + "," + .4795*d + " " + d + "," + .5522*d + " " + d + "," + .5261*d)
+            .attr("fill", "orange")
+            .attr("fill-opacity", "0");
+
+        var b3 = svg.append("polygon")
+            .attr("id", "b3")
+            .attr("points", .5901*d + "," + .4795*d + " " + .6020*d + "," + .5000*d + " " + d + "," + .5783*d + " " + d + "," + .5522*d)
+            .attr("fill", "yellow")
+            .attr("fill-opacity", "0");
+
+        var b4 = svg.append("polygon")
+            .attr("id", "b4")
+            .attr("points", .6020*d + "," + .5000*d + " " + .6139*d + "," + .5205*d + " " + d + "," + .6044*d + " " + d + "," + .5783*d)
+            .attr("fill", "green")
+            .attr("fill-opacity", "0");
+
+        var b5 = svg.append("polygon")
+            .attr("id", "b5")
+            .attr("points", .6139*d + "," + .5205*d + " " + .6258*d + "," + .5410*d + " " + d + "," + .6305*d + " " + d + "," + .6044*d)
+            .attr("fill", "blue")
+            .attr("fill-opacity", "0");
+
+        var b6 = svg.append("polygon")
+            .attr("id", "b6")
+            .attr("points", .6258*d + "," + .5410*d + " " + .6377*d + "," + .5615*d + " " + d + "," + .6566*d + " " + d + "," + .6305*d)
+            .attr("fill", "purple")
+            .attr("fill-opacity", "0");
+        
+        svg.on("click", function() {
+            if (drawn) {
+                ray.transition().attr("stroke-opacity", "0").duration(1)
+                stop1.transition().attr("stop-opacity", "0").duration(1)
+                b1.transition().attr("fill-opacity", "0").duration(1)
+                b2.transition().attr("fill-opacity", "0").duration(1)
+                b3.transition().attr("fill-opacity", "0").duration(1)
+                b4.transition().attr("fill-opacity", "0").duration(1)
+                b5.transition().attr("fill-opacity", "0").duration(1)
+                b6.transition().attr("fill-opacity", "0").duration(1)
+            } else {
+                ray.transition().attr("stroke-opacity", "1").duration(500)
+                stop1.transition().attr("stop-opacity", "1").duration(1000) 
+                b1.transition().attr("fill-opacity", "1").duration(1500)
+                b2.transition().attr("fill-opacity", "1").duration(1500)
+                b3.transition().attr("fill-opacity", "1").duration(1500)
+                b4.transition().attr("fill-opacity", "1").duration(1500)
+                b5.transition().attr("fill-opacity", "1").duration(1500)
+                b6.transition().attr("fill-opacity", "1").duration(1500)
+            }
+
+            drawn = !drawn;
+        });
+	</script>
+</body>
+</html>

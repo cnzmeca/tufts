@@ -1,0 +1,3 @@
+Run autoencoder: hw4starter_ae.py --help
+Run variational autoencoder: hw4starter_vae.py --help
+Graph metrics: python3 graph.py

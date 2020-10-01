@@ -1,0 +1,43 @@
+Christian Zinck
+HW 4
+
+Assignment Purpose:
+The purpose of this assignment was to create an alphabetizer using a BST and
+print the alphabetized results.
+
+Help Received:
+I did not receive any help.
+
+Files Provided:
+main.cpp - The main project file
+testAlphabetizer.cpp - The test file for the Alphabetizer class
+Alphabetizer.cpp - Contains the member functions and data for the Alphabetizer
+class
+Alphabetizer.h - Contains the class defintion for the Alphabetizer class
+testStringBST.cpp - The test file for the StringBST class
+StringBST.cpp - Contains the member functions and data for the StringBST class
+StringBST.h - Contains the class definition for the StringBST class
+test.txt - Input file used for testing
+Makefile - Allows the user to execute complex commands with simpler ones
+README - This file
+
+Compilation and Execution:
+To compile the program type "make" into the command prompt
+To execute the program type "./alphabetizer [order filename]" into the command 
+prompt.
+
+Data Structures:
+In this assignment I used a binary search tree as my data structure. Aside from
+being required to use a BST, it is a good structure for an alphabetizer because
+it is a self sorting data structure. All I had to do was maintain the invariants
+of the BST when adding and removing node, and when it came time to print the
+results, it was easy to produce a sorted order. Two other problems that a BST
+would be good for are priority queues and as an nlogn sorting algorithm.
+
+Testing:
+When testing my StringBST I unit tested my functions in pairs. I would write a
+function and its corresponding helper function and then test them at the same
+time. For the add and remove functions I tested each individual case after
+writing it and before moving on to the next case. To test the Alphabetizer I
+just created a sample input text file and fed it into the run function and also
+tested a bunch using cin.

@@ -1,0 +1,76 @@
+Christian Zinck
+HW 3
+
+Assignment Purpose:
+The Purpose of this assignment was to create and test a simulation of a grocery
+store checkout.
+
+Help Received:
+I did not receive any help.
+
+Files Provided:
+main.cpp - The main test file for the simulation
+testCheckoutQueue.cpp - The test file for the CheckoutQueue class
+GrocerySim.cpp - Contains the member functions and data for the GrocerySim class
+GrocerySim.h - Contains the class defintion for the GrocerySim class
+CheckoutQueue.cpp - Contains the member functions and data for the CheckoutQueue
+class
+CheckoutQueue.h - Contains the class definition for the CheckoutQueue class
+shopper.h - Contains the definition for the shopper struct
+Makefile - Allows the user to execute complex commands with simpler ones
+README - This file
+
+Compilation and Execution:
+To compile the program type "make" into the command prompt
+To execute the program type "./grocerySim NUM_STANDARD_LANES NUM_EXPRESS_LANES
+MAX_EXPRESS_ITEMS [INPUT_FILE]" into the command prompt. The input file is
+optional.
+
+Data Structures:
+In this assignment I used a queue to simulate a grocery store line because it
+mimics the FIFO(first in first out) nature of a line in real life. I decided to
+implement the queue using a linear sequence because it makes accessing based on
+index easy, which helped when looping through the queues. In hindsight I wish
+I had used a circular sequence because it would've been more memory efficient
+and I wouldn't have had to deal with shifting the shoppers down one by one after
+dequeueing. 2 other examples of queues in real life are drive-thrus and print
+queues. The most interesting algorithm in my code was my fastestLine function.
+In this function I first test if the shopper is eligible for an express line.
+If they are then I allow them to iterate through all lines to find the shortest
+one and if not I make them start at the first standard checkout line. What I 
+like about this algorithm is it makes it so I dont have to differentiate betweenexpress lines and standard lines outside of the function.
+
+Testing:
+When testing my CheckoutQueue class I used the traditional unit testing order.
+Constructor->Destructor->Print->Helper Functions->Simple Functions->Complex
+Functions, testing each one by one, including edge and error cases. Testing the
+actual simulation was a little more interesting. I started off with 1 standard
+line and no express lines and used cin for input. Then I set up my file input
+so I could use either cin or a prewritten file. Lastly I designed and tested
+fastestLine to optimize which line a shopper should join. The data I used in my
+final tests was from piazza:
+4 4
+22 2
+35 2
+52 18
+60 39
+71 28
+87 2
+93 30
+108 39
+125 40
+141 19
+148 17
+154 8
+169 24
+170 46
+174 34
+183 19
+197 27
+215 32
+232 36
+250 16
+254 7
+270 45
+282 41
+

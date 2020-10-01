@@ -1,0 +1,21 @@
+// Christian Zinck
+// COMP11
+// HW 1
+// Programming #1
+// February 2, 2017
+#include <iostream>
+using namespace std;
+
+int main() 
+{
+  int total = 0;
+  for(int i = 0; i < 8; i++)
+    {
+      cout << "Input a number.";
+      int input;
+      cin >> input;
+      total += input;
+    }
+  cout << total;
+  return 0;
+}

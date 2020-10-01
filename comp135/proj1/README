@@ -1,0 +1,14 @@
+Christian Zinck
+Project 1
+10/23/18
+
+To run my program logreg.py, use the command:
+python logreg.py [filename] [scale] [grad] [lambda] [alpha] [term] [fold]
+
+filename is the name of a csv file containing training data
+scale is a bool deciding if the data should be scaled by the maximum element
+grad is the gradient descent type
+lambda is the regularizer value
+alpha is the step size
+term is the cutoff for diff
+fold is the number of folds in cross validation

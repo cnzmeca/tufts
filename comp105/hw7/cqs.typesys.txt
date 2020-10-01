@@ -1,0 +1,33 @@
+Christian Zinck
+10/26/18
+
+1.
+        | ty (AAT (a, i)) = FORMALVAR
+        | ty (APUT (a, i, e)) = FORMALASSIGN
+        | ty (AMAKE (len, init)) = ARRAYTYPE
+        | ty (ASIZE a) = BASETYPES
+
+        The ARRAYTYPE rule states that ARRAY(T) is a type if T is a type
+
+2.
+a.      ((length sym) syms)
+b.      ((@ o int bool bool) positive? not?)
+c.      (val third (type-lambda ['a, 'b, 'c] (lambda ([x : 'c]) x)))
+
+3.
+a.      true
+b.      false
+
+4.
+a.      No, true and false evaluations are of different types
+b.      Yes, the type is int
+c.      Yes, the type is int
+d.      No, a type-lambda is needed to establish 'a as a type
+e.      Yes, the type is 'a
+
+5.      while
+
+6.
+a.      427c
+b.      null?, cons, car, and cdr
+c.      1264

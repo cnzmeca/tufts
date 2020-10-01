@@ -1,0 +1,53 @@
+Christian Zinck
+HW 5
+
+Purpose:
+The purpose of this assignment was to write 3 sorting methods that can be called
+from a main function.
+
+Help received:
+I did not receive any help on this assignment.
+
+Files provided:
+sorter.cpp - Contains main function for assignment.
+sortAlgs.cpp - Contains sorting algorithm implementations
+sortAlgs.h - Contains sorting algorithm declarations
+Makefile - Allows user to enter target phrases to execute complicated commands
+README - this file
+
+Compilation and Execution:
+To compile the program type "make" into your command prompt.
+To execute the program type "./sorter sortAlg outputMode [fileName]" into your
+command prompt where sortAlg is -s1, -s2, or -s3, outputMode is --save or
+--print, and fileName is the name of an optional file to read from.
+
+Data Structures and Algorithms:
+In this assignment I used a std:vector as my data structure, which is
+implemented using a sequence. We used vectors in this assignment because they
+have constant time index access which is highly useful when sorting. Also, after
+the vectors were created, they no longer needed to have their capacities
+increased which is a downside to sequence based data structures.
+
+Insertion sort has a worst case O(n^2), an average case O(n^2) and a best case
+O(n). Its best case input is a sorted array while its worst case is a reverse
+sorted array.
+
+Merge sort has a worst case O(nlogn), an average case O(nlogn), and a best case
+O(nlogn). Its best case input is a sorted array while its worst case is a
+reverse sorted array.
+
+Quick sort has a worst case O(n^2), an avaerage case O(nlogn), and a best case
+O(nlogn). Its best case input is one such that each partition results in equal
+halves. Its worst case input is a sorted list or reverse sorted list.
+
+Testing:
+I took a different approach to testing this time. I started off by writing the
+sorter.cpp file, making sure that all the command line arguments got assigned to
+the right variables and that all edge case errors were caught. I got the fileio
+working and tested it with unsorted lists. I then wrote insertion sort, the
+easiest of the 3 algorithms. Once I had written insertion sort, I was able to
+use it in place of the recursive calls in merge sort and quick sort which made
+debugging much easier and helped with the recursive leap. After all my
+algorithms were working got some randomly generated sequences containing all
+numbers 1 to x and fed them in using cin and input files to make sure everything
+worked correctly.

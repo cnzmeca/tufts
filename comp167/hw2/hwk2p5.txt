@@ -1,0 +1,14 @@
+Fasta:
+MFKRMAEFGPDSGGRVKGVTIVKPIVYGNVARYFGKKREEDGHTHQWTVYVKPYRNEDMS
+AYVKKIQFKLHESYGNPLRVVTKPPYEITETGWGEFEIIIKIFFIDPNERPVTLYHLLKL
+FQSDTNAMLGKKTVVSEFYDEMIFQDPTAMMQQLLTTSRQLTLGAYKHETEFAELEVKTR
+EKLEAAKKKTSFEIAELKERLKASRETINCLKNEIRKLEEDDQAKDI
+
+There are homologs of this protein in mice, zebrafish, flies, roundworm,
+soybean, thale cress, yeast, and several others to a lesser extent. They have
+respective percent sequence identities: 99%, 91%, 60%, 49%, 51%, 48%, and 33%.
+They have E values: 1e-169, 9e-143, 3e-93, 7e-66, 1e-41, 9e-39, and 6e-38.
+
+After changing the matrix used and the gap penalty settings, I still got the
+same set of "hits" for the most part, but they were in a different order due
+to the results being sorted by score and not e-value or % identity.

@@ -1,0 +1,28 @@
+10    = \f.\x.f (f (f (f (f (f (f (f (f (f x)))))))));
+zero? = \n.n (\x.false) true;
+
+even? = \x.x (\y.y false true) true;
+
+check-equiv (even? 3) = false;
+check-equiv (even? 4) = true;
+
+div2 = \x.fst(x (\y.(snd y) (pair (succ (fst y)) false) (pair (fst y) true))
+        (pair 0 false));
+
+check-equiv (div2 3) = 1;
+check-equiv (div2 4) = 2;
+check-equiv (div2 10) = (succ 4);
+
+noreduce binary = Y (\binary.\x.((zero? x) 0
+        (+ ((even? x) 0 1) (* 10 (binary (div2 x))))));
+
+check-equiv (binary 0) = 0;
+check-equiv (binary 1) = 1;
+check-equiv (binary 2) = 10;
+check-equiv (binary 3) = (+ 10 1);
+
+noreduce nth = \n.\xs. car (n (\y. cdr y) xs);
+
+check-equiv (nth 0 (cons Alpha (cons Bravo (cons Charlie nil)))) = Alpha;
+check-equiv (nth 2 (cons Alpha (cons Bravo (cons Charlie nil)))) = Charlie;
+~                                                                           

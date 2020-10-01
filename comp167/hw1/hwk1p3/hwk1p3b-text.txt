@@ -1,0 +1,10 @@
+Christian Zinck
+hwk1p3b
+9/20/18
+
+To solve this problem I used scipy hierarchical clustering to produce a linkage
+matrix and constructed a dendrogram that I truncated to get 2 clusters of
+size greater than 1.
+
+The clustering accurately labeled 45/48 cases (94%), but it labeled 45/45 (100%)
+that were actually clustered.

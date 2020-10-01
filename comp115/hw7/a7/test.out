@@ -1,0 +1,123 @@
+ANALYZE
+ANALYZE
+ANALYZE
+ANALYZE
+CREATE INDEX
+                         QUERY PLAN                          
+-------------------------------------------------------------
+ Index Scan using i on r  (cost=0.00..11.51 rows=2 width=39)
+   Index Cond: (r_2 = 0)
+(2 rows)
+
+DROP INDEX
+CREATE INDEX
+                              QUERY PLAN                              
+----------------------------------------------------------------------
+ Bitmap Heap Scan on r  (cost=334.42..17925.73 rows=17800 width=39)
+   Recheck Cond: (r_1p = 0)
+   ->  Bitmap Index Scan on i  (cost=0.00..329.97 rows=17800 width=0)
+         Index Cond: (r_1p = 0)
+(4 rows)
+
+DROP INDEX
+CREATE INDEX
+                         QUERY PLAN                         
+------------------------------------------------------------
+ Seq Scan on r  (cost=0.00..41667.00 rows=1003467 width=39)
+   Filter: (r_50p = 0)
+(2 rows)
+
+DROP INDEX
+CREATE INDEX
+                            QUERY PLAN                             
+-------------------------------------------------------------------
+ Bitmap Heap Scan on r  (cost=28.08..2960.25 rows=904 width=39)
+   Recheck Cond: ((r_1p = 0) AND (r_10p = 0) AND (r_50p = 0))
+   ->  Bitmap Index Scan on i  (cost=0.00..27.86 rows=904 width=0)
+         Index Cond: ((r_1p = 0) AND (r_10p = 0) AND (r_50p = 0))
+(4 rows)
+
+DROP INDEX
+CREATE INDEX
+                                    QUERY PLAN                                     
+-----------------------------------------------------------------------------------
+ Bitmap Heap Scan on r  (cost=182.82..12126.81 rows=5919 width=39)
+   Recheck Cond: ((r_10p = 0) AND (r_50p = 0) AND (r_1p >= 0) AND (r_1p <= 5))
+   ->  Bitmap Index Scan on i  (cost=0.00..181.34 rows=5919 width=0)
+         Index Cond: ((r_10p = 0) AND (r_50p = 0) AND (r_1p >= 0) AND (r_1p <= 5))
+(4 rows)
+
+DROP INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+                                   QUERY PLAN                                    
+---------------------------------------------------------------------------------
+ Nested Loop  (cost=0.00..107.13 rows=25 width=19)
+   ->  Nested Loop  (cost=0.00..70.16 rows=2 width=23)
+         ->  Nested Loop  (cost=0.00..65.19 rows=2 width=8)
+               ->  Index Scan using i_u on u  (cost=0.00..23.68 rows=5 width=4)
+                     Index Cond: (u_5 = 0)
+               ->  Index Scan using i_s2 on s  (cost=0.00..8.29 rows=1 width=12)
+                     Index Cond: (u_id = u.u_id)
+         ->  Index Scan using t_pkey on t  (cost=0.00..2.48 rows=1 width=19)
+               Index Cond: (t_id = s.t_id)
+   ->  Index Only Scan using i_r on r  (cost=0.00..18.39 rows=10 width=4)
+         Index Cond: (s_id = s.s_id)
+(11 rows)
+
+DROP INDEX
+DROP INDEX
+DROP INDEX
+DROP INDEX
+CREATE INDEX
+CREATE INDEX
+                             QUERY PLAN                             
+--------------------------------------------------------------------
+ Nested Loop  (cost=0.00..197.32 rows=20 width=8)
+   ->  Index Scan using i_s on s  (cost=0.00..19.62 rows=4 width=8)
+         Index Cond: (s_4 = 0)
+   ->  Index Scan using i_r on r  (cost=0.00..44.37 rows=5 width=8)
+         Index Cond: (s_id = s.s_id)
+         Filter: (r_50p = 0)
+(6 rows)
+
+DROP INDEX
+DROP INDEX
+CREATE INDEX
+CREATE INDEX
+                                 QUERY PLAN                                  
+-----------------------------------------------------------------------------
+ Bitmap Heap Scan on r  (cost=343.42..17980.36 rows=17810 width=39)
+   Recheck Cond: ((r_1p = 0) OR (r_10 = 0))
+   ->  BitmapOr  (cost=343.42..343.42 rows=17810 width=0)
+         ->  Bitmap Index Scan on i2  (cost=0.00..329.97 rows=17800 width=0)
+               Index Cond: (r_1p = 0)
+         ->  Bitmap Index Scan on i  (cost=0.00..4.54 rows=10 width=0)
+               Index Cond: (r_10 = 0)
+(7 rows)
+
+DROP INDEX
+DROP INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+                                 QUERY PLAN                                 
+----------------------------------------------------------------------------
+ Nested Loop  (cost=0.00..109.51 rows=1 width=81)
+   ->  Nested Loop  (cost=0.00..65.26 rows=1 width=46)
+         ->  Index Scan using i_t2 on t  (cost=0.00..23.74 rows=5 width=19)
+               Index Cond: (t_5 = 0)
+         ->  Index Scan using i_t on s  (cost=0.00..8.29 rows=1 width=31)
+               Index Cond: (t_id = t.t_id)
+               Filter: (s_20 = 0)
+   ->  Index Scan using i_s on r  (cost=0.00..44.15 rows=10 width=39)
+         Index Cond: (s_id = s.s_id)
+(9 rows)
+
+DROP INDEX
+DROP INDEX
+DROP INDEX
+DROP INDEX

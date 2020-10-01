@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    
+    <title>HATS: House All Tufts Students</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0"/>
+    <link rel="stylesheet" href="main_style.css" type="text/css" />
+	<!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--Google Maps API-->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyBsnmTYDXZYg2w0VEGorwJhcpbM2h8vgXA"></script>
+    <!--Google Charts API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!--Use for Zillow API calls-->
+    <script>
+        var ourZWSID = "X1-ZWz18x9o76cnpn_ako3m";
+    </script>
+    <!--Walkscore Travel Time API-->
+<!--    <script src = "https://apicdn.walkscore.com/api/v1/traveltime/js?wsid=gf3697af166cf445cb7b7df2a80ef773d"></script>    -->
+    <script src="landing_page.js"></script>
+</head>
+    
+<body onload="loadLandingPage()">
+    <h1 id="title">HATS: House All Tufts Students</h1>
+    <div id="map"></div>
+    <div id="enter_window">
+        <h3>Enter Preferences Here:</h3>
+        <h5 id="prompt">Enter your preferred location:</h5>
+        <form  id="locationForm" action="#">
+            <input type="radio" name="location" value="Halligan"> Halligan <br>
+            <input type="radio" name="location" value="SEC"> SEC <br>
+            <input type="radio" name="location" value="Campus Center"> Campus Center <br>
+            <input type="radio" name="location" value="Fletcher"> Fletcher <br>
+            <input type="radio" name="location" value="574 / Sci-Tech"> 574 / Sci-Tech <br>
+            <input type="radio" name="location" value="Davis Square"> Davis Square <br> <br>
+            <input type="submit" value="Next" onclick="storeLocationPreference()">
+        </form>
+        <div id="slider"> </div>
+    </div>
+</body>
+    
+</html>

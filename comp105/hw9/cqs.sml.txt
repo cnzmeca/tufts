@@ -1,0 +1,77 @@
+Christian Zinck
+CQs 9
+11/13/18
+
+1.
+a.      Yes
+b.      Yes
+c.      Yes
+d.      No change is needed
+e.      Env' is the exact same as Env because the name type is still set to
+        string by the structure ExposedEnv even though it is not assigned in
+        the signature ENV
+
+2.
+a.
+functor TestSetFun(
+        name:string,
+        compare:(test * test -> order),
+        testToString:(test -> string)      
+        )
+        :> TEST_SET = struct ... end
+
+b.      
+structure CheckTypeSet :> TEST_SET where type test = check_type_test =
+TestSetFun(
+        fun uid          (u, _, _, _) = u
+        fun serialNumber (_, k, _, _) = k
+        fun exp          (_, _, e, _) = e
+        fun ty           (_, _, _, t) = t
+        val name = uid test
+        fun compare (test1 test2) =
+        case String.compare (uid test1, uid test2)
+                of EQUAL => Int.compare (serialNumber test1, serialNumber test2)
+                | diff  => diff
+        fun testToString test = concat["(check-type ", expString (exp test),
+                                       " " , tyString (ty test), ")"]
+3.
+a. "where type test = check_type_test" is instatiating the abstract type test
+as the type check_type_test
+b. The structure would not be able to use the type test because it is not given
+a concrete definition
+
+4. 
+a.
+fun invariant [] = true
+|   invariant x::[] = true
+|   invariant x::y::zs = (x < y) andalso invariant (y::zs)
+
+b.
+fun invariant ZERO = true
+|   invariant TIMES10PLUS(ZERO, 0) = false
+|   invariant TIMES10PLUS(m, d) = if (d < 10) then true else false
+
+c.
+fun absfun (l, f, r) =
+List.concat[(List.map UNFINGERED l), [FINGERED f], (List.map UNFINGERED r)]
+
+5. 
+02 divided by 7 == 0 remainder 2
+29 divided by 7 == 4 remainder 1
+11 divided by 7 == 1 remainder 4
+48 divided by 7 == 6 remainder 6
+
+6.
+a.
+  q0 = 6          r0 = 1
+  q1 = 3          r1 = 0
+  q2 = 1          r2 = 1
+  q3 = 0          r3 = 1
+
+  1101
+
+b.
+  q0 = 3          r0 = 1
+  q1 = 0          r1 = 3
+
+  31

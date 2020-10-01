@@ -1,0 +1,30 @@
+Christian Zinck
+CQs 6
+10/16/18
+
+1.
+a.      Yes, x = 1, y = 2, zs = [3, nil] and w = ("COMP", 105)
+b.      No, ("COMP", 105) is a tuple, not a list
+c.      No, only 1 term ("COMP", 105) in list x::y::zs.
+d.      Yes, x = "COMP", y = 105, zs = nil and w = true.
+e.      Yes, x = true, y = false, zs = nil and w = 2.718281828.
+
+2.
+a.      'a list
+b.      'a list list
+c.      'a list
+
+3.
+        val () =
+            Unit.checkExpectWith Int.toString "foldl sum"
+            (fn () => foldl (op +) 0 [1, 2, 3])
+            7
+
+4.
+a.      (#t)
+b.      The user sees an error message: "Applied non-function #t"
+
+5.
+a.      equal?
+b.      x and equal?
+c.      or, atom?, =, and, and equal?

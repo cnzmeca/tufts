@@ -1,0 +1,6 @@
+Feed forward neural network
+4 input nodes
+1 hidden layer with 2 nodes
+3 output nodes
+
+Run Command: python iris.py data.txt

@@ -1,0 +1,7 @@
+Christian Zinck
+12/13/18
+
+Run python analysis.py to perform feature analysis.
+Run python sim_matrix.py to create sim_matrix.npy (already included).
+Run python recommend.py to evaluate the learning algorithm and generate 5
+movies recommendations for each user in a file called recommendations.txt

@@ -1,0 +1,17 @@
+Christian Zinck
+hwk1p5b
+9/20/18
+
+I selected EMR2, CLCN1, and CCND2 to be my correlated genes. I found them
+by scripting to find genes that, on average, had multiplicatively lower
+or higher expression from current smokers to never smokers, and selecting a few
+that were returned.
+
+When I reran part 2 with the modified data set the percentage improved slightly.
+The 1NN method labeled 25/30 correctly (83%), up from (77%).
+The 3NN method labeled 19/30 correctly (63%), up from (60%).
+
+Although the improvement is not drastic, it shows that selecting specific genes
+to test can improve the accuracy of the labeling, and perhaps a larger selection
+of correlated genes could further improve the accuracy.
+

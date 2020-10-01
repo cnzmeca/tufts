@@ -1,0 +1,150 @@
+Christian Zinck
+HW4 Design Doc
+
+Project Architecture
+40image.c - handles command line arguments and calls compress40 or decompress40
+on the image provided from command line or standard in. Doesn't see any of the
+actual transformation process.
+
+compress40.c - contains compress40 and decompress40. Calls the functions from
+ppm_ypp and ypp_codeword to produce the desired compression or decompression.
+
+ppm_ypp.c - contains functions that allow for the two-way conversion between PPM
+format and component video format. Uses the invariant sets:
+        y = 0.299 * r + 0.587 * g + 0.114 * b;
+        pb = -0.168736 * r - 0.331264 * g + 0.5 * b;
+        pr = 0.5 * r - 0.418688 * g - 0.081312 * b;
+        
+        and 
+        
+        r = 1.0 * y + 0.0 * pb + 1.402 * pr;
+        g = 1.0 * y - 0.344136 * pb - 0.714136 * pr;
+        b = 1.0 * y + 1.772 * pb + 0.0 * pr;
+
+ypp_codeword.c - contains functions for constructing or deconstructing codewords
+of the proper format. Uses the invariant sets:
+        a = (Y4 + Y3 + Y2 + Y1)/4.0
+        b = (Y4 + Y3 − Y2 − Y1)/4.0
+        c = (Y4 − Y3 + Y2 − Y1)/4.0
+        d = (Y4 − Y3 − Y2 + Y1)/4.0
+
+        and
+
+        Y1 = a − b − c + d
+        Y2 = a − b + c − d
+        Y3 = a + b − c − d
+        Y4 = a + b + c + d
+
+bitpack.c -  contains functions for bit manipulation used to pack or unpack
+codewords to or from a 4 byte disk space in big-endian order.
+
+Component Architecture:
+40image.c -
+        main: runs compress40 if -c flag is given and decompress40 if -d flag
+        is given. Accepts either a file name containing a ppm image or a ppm
+        image from stdin.
+compress40.c - 
+        compress40: reads the image from the given stream, and, if necessary,
+        trims the image to be 2m x 2n pixels where m and n are integers. Then
+        maps through ppm image and applies ppmtoypp to each pixel. Maps through
+        ypp image and applies encodeword to each 2x2 pixel group, creating a new
+        compressed image. Prints the result.
+        decompress40: reads the image from the given stream and maps through it
+        applying decodeword to each word yielding a 2x2 pixel group per word.
+        Maps through the new ypp image applying ypptoppm to each pixel,
+        resulting in a decompressed ppm image and prints it.
+
+ppm_ypp.c - 
+        ppmtoypp: converts a pixel from ppm format to component video format.
+        ypptoppm: converts a pixel from component video format to ppm format.
+
+ypp_codeword.c - 
+        encodeword: creates a codeword for a 2x2 pixel group by calculating
+        Pr, Pb, a, b, c, and d and packing them appropriately by using bitpack
+        functions.
+        decodeword: extracts Pr, Pb, a, b, c, and d from each codeword using
+        bitpack functions and reconstructs a 2x2 ypp pixel group from the info.
+        quantize: does the quantization operation
+        dequantize: undoes the quantization operation
+        dct: does the DCT calulation
+        undct: undoes the DCT calculation
+bitpack.c -
+        Bitpack_fitsu: tests if the given unsigned integer can be represented
+        in a certain number of bits 
+        Bitpack_fitss: tests if the given signed integer can be represented
+        in a certain number of bits
+        Bitpack_getsu: retrieves an unsigned value from a word given its size
+        and position
+        Bitpack_getss: retrieves signed value from a word given its size
+        and position
+        Bitpack_newsu: returns a new word with a given unsigned value and given
+        size and position
+        Bitpack_newss: returns a new word with a given signed value and given
+        size and position
+
+Testing:
+compress40.c - provided ppm_ypp.c, ypp_codeword.c, and uarray2.c are all
+implemeneted correctly, compress40.c should work flawlessly as it introduces
+very little new code. The only thing that must be tested is the evening of the
+dimensions, for which I will test using 4 images of each parity combination for
+height and width.
+
+ppm_ypp.c - to test ppm_ypp.c I will provide a variety of rgb and ypp inputs
+For example, an rgb of (0,0,0) will be a ypp of (0,0,0), a ypp of (1,0,0) will 
+be an rgb of (1,1,1).
+
+ypp_codeword.c - to test ypp_codeword.c I will first test the dtc functions
+and quantizations functions separately and then incorporate them with the
+bitpack functions to test encodeword and decodeword. To test the dtc functions
+I will use a variety of pixel and dtc space inputs. For example a pixel block
+(1,1,1,1) will be (1,.5,.5,.5) in dtc space and (0,0,0,0) in dtc space will be a
+pixel block (0,0,0,0). To test the quantization functions I will provide a
+variety of inputs from -.5 to .5 or -15 to 15 depending on the function I am
+testing. For example an input of .-5 should result in -15 and an input of .123
+should result in an output of 6. Conversely, an input of -15 should result in an
+output of -.3 and an input of 0 should result in an output of 0.
+
+bitpack.c - to test the functions in bitpack.c I will test each function pair
+with the same input sets and verify that the have outputs that differ when they
+are supposed to. For example, the fit functions should both return true when
+the number is 5 and the width is 4, but unsigned will return true and signed
+will return false when the number is 5 and the width is 3. The get and new
+functions will need to be tested in conjunction. For example I will verify
+that after creating a new word I am able to get the same word back using the
+get function. I will also verify that passing the result of a get function call
+into the new function results in a copy of the word from the get function being
+created.
+
+Finally, in addition to all previously mentioned tests, I will validate that all
+CREs are handled appropriately with a test case designed to trigger each one.
+
+Challenge Problem:
+My interface design is in no way reliant on the current codeword format, so it
+will not need to change to accomodate the challenge format. Since I have
+isolated the codeword construction and deconstruction into a single file, the
+challenge should at most affect the ypp_codeword file. In order to avoid
+changing multiple lines in that file, or any file for that matter, I will
+implement using as many single points of truth as possible. Finally, to prevent
+the files I alter from being too large, I have divided up the process into as
+many files as I could without requiring redunant code.
+
+Compression Questions:
+There are several places where loss can occur in compression and decompresion.
+The first and most obvious loss is the trimming that must occur in order for the
+compression process to occur. Any time floating point numbers are used, loss is
+inevitable, especially when operations are performed. This loss can be mitigated
+by minimizing the number of operations done on floats and performing them in an
+order that will allow the least significant digits to accumulate before they are
+lost. Quantization is by its very nature lossy. It condenses a certain
+range of values into a collection of specific subvalues that can be represented
+by much fewer bits. Finally, there is no way to undo an arithmetic mean
+calculation, so the decompressor has no way of retrieving the original Pb and Pr
+values.
+
+If the compressor and decompressor are designed ideally, compressing and
+decompressing an image that has already been compressed and decompressed should
+not result in additional information lost because the image has already been
+stored in both the compressed and decompressed formats, so further conversion
+between formats should not be lossy. Unfortunately, in practice that is not
+always the case, especially when using quantization, as repeated quantizing will
+result in rapidly accumulating loss.

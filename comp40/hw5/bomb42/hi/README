@@ -1,0 +1,25 @@
+This is bomb 42 for lab comp40spring18.
+
+It is owned by the following student(s):
+Christian.Zinck@tufts.edu
+Phong.Hoang@tufts.edu
+
+We discussed the assignment with classmates and received help from TAs.
+
+Phase 1: Explodes unless the given string is equivalent to the string: 
+         "You may charm it with smiles and soap."
+Phase 2: Explodes unless the given string contains 6 integers, starting at 1,
+         and incrementing by 5.
+Phase 3: Explodes unless the given string contains 2 integers, the second of
+         which must be equal to the value contained in the switch case
+         determined by the first interger, which must be between 0 and 7.
+Phase 4: Explodes unless the given string contains 1 integer x such that:
+         7 ^ x = 5764801
+Phase 5: Explodes unless the given string contains 2 integers. The first integer
+         is the starting index in the array. This integer must be 13, so after
+         10 jumps, it will land on 15. The second integer is the sum of all
+         indices visited, not including the starting index. This integer must
+         be 69 because that is the sum of {9, 4, 8, 0, 10, 1, 2, 14, 6, 15}, the
+         indices visited.
+Phase 6: Explodes unless the given string contains 1 integer. The integer must
+         be equal to the 5th value in the sorted linked list: 663.

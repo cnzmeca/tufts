@@ -1,0 +1,44 @@
+Christian Zinck
+CQs 3
+9/25/18
+
+1.
+a.      2
+b.      if (null? list)
+c.      5
+d.      if (symbol? s)
+        if (number? s)
+        if (boolean? s)
+        if (null? s)
+
+2.
+a.      Second
+b.      First
+c.      Second
+
+3.
+a.      'a
+b.      '(b 1 2)
+c.      #f
+
+4.      b
+
+5.      Simple reverse uses O(n) append to put the reverse of the cdr in front
+        of the car of a cons cell. Reverse does a similar process, but instead
+        of appending to the existing list, it appends to an initially empty
+        list, which gives O(n) time overall.
+
+6.      
+a.      Jumbo
+b.      Beaver
+c.      ()
+d.      Engineer
+
+7.      (find x (bind x y zs) == y
+
+8.      make-3point, 3point?, 3point-x, 3point-y, 3point-z
+
+9.
+a.      no
+b.      yes
+c.      yes

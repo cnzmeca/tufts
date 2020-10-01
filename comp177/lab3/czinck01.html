@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+h1 {
+  padding-left: 40px;
+  margin-bottom: -10px;
+}
+
+h3 {
+  padding-left: 60px;
+  margin-bottom: -10px;
+}
+
+.counties {
+  fill: none;
+}
+
+.states {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+
+.q4-5 { fill:rgb(255,0,0); }
+.q3-5 { fill:rgb(191,0,63); }
+.q2-5 { fill:rgb(127,0,127); }
+.q1-5 { fill:rgb(63,0,191); }
+.q0-5 { fill:rgb(0,0,255); }
+
+
+</style>
+<h1></h1></br>
+<h3></h3>
+<svg width="960" height="600"></svg>
+<script src="js/d3.v4.min.js"></script>
+<script src="js/topojson.v1.min.js"></script>
+<script>
+
+var title = d3.select("h1")
+    .text("Drought by County");
+
+var subtitle = d3.select("h3")
+    .text("Red zones are dry; blue zones are wet.");
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+var rateById = d3.map();
+
+var quantize = d3.scaleThreshold()
+    .domain([100, 200, 300, 400])
+    .range(d3.range(5).map(function(i) { return "q" + i + "-5"; }));
+
+var projection = d3.geoAlbersUsa()
+    .scale(1280)
+    .translate([width / 2, height / 2]);
+
+var path = d3.geoPath()
+    .projection(projection);
+
+d3.queue()
+    .defer(d3.json, "js/us.json")
+    .defer(d3.tsv, "tsv/drought.tsv", function(d) { rateById.set(d.FIPS, d.D0 + d.D1 + d.D2 + d.D3 + d.D4); })
+    .await(ready);
+
+function ready(error, us) {
+  if (error) throw error;
+
+  svg.append("g")
+      .attr("class", "counties")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+      .attr("class", function(d) { return quantize(rateById.get(d.id)); })
+      .attr("d", path);
+
+  svg.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .attr("class", "states")
+      .attr("d", path);
+}
+
+</script>

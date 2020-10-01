@@ -1,0 +1,8 @@
+Christian Zinck
+hwk1p3c
+9/20/18
+
+To solve this problem I used the scipy kmeans clustering algorithm, which
+outputs k centroids, which can be used to group the data into 2 clusters.
+
+The kmeans clustering accurately clustered 46/48 cases (96%).

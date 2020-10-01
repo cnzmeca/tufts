@@ -1,0 +1,62 @@
+Christian Zinck
+12/11/18
+CQs 11
+
+1.
+a.      receiver:       w
+        argument:       2
+        message:        div
+b.      receiver:       shape
+        argument:       self
+        message:        drawOn
+
+c.      receiver:       shapes
+        argument:       [block (shape) (drawOn: shape self)]
+        message:        do
+
+2.
+a.      nothing
+b.      # of :'s = # of args
+
+3.
+a.      add and draw are part of the instance protocol and empty is part of the
+        class protocol
+b.      messages in the class protocol are handled by class-methods while
+        messages in the instance protocol are handled by methods
+        class-methods are usually used to instanciate or delete objects
+4.      
+        Dispatch to method m1 on class C
+        Dispatch to method m1 on class B
+        Dispatch to method m2 on class B
+5.
+asFraction      Number          Fraction        Number
+divReduce       Fraction        Number          Fraction
+gcd             Fraction        Number          Number
+div             Fraction        Number          Number
+
+6.
+a.      1.      Method new on class ListSentinel
+        2.      Method new on class SequenceableCollection
+        3.      Method sentinel on class
+b.      1.      Creates new sentinel instance
+        2.      Creates new superclass instance
+        3.      Sets the sentinel to the superclass instance
+c.      1
+
+7.      1.      Convert a Number instance to an Integer instance
+        2       Convert a Number instance to an Fraction instance.
+        3.      Convert a Number instance to an Float instance
+        4.      Delegate the responsibility of converting the instance to a
+                Number instance to the instances asNumber method
+
+8.      b
+
+9.      
+a.      = and <
+b.      +, *, negated, reciprocial, asInteger, asFraction, asFloat, coerce
+
+10.
+a.      +, *, coerce
+b.      Method + sends addLargePositiveIntegerTo: to the argument
+        Method * sends timesLargePositiveIntegerTo: to the argument
+        Method coerce sends toLargePositiveIntegerTo: to the argument

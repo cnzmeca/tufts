@@ -1,0 +1,22 @@
+Christian Zinck
+Assignment 4: Arith
+
+Collaboration:
+I discussed the assignment with fellow classmates and received advice from TAs.
+
+Implementation:
+Everything has been implemented correctly.
+
+Architecture:
+The compression is broken up into 3 phases, each of which has its own module:
+ppm_ypp, ypp_ppabcd, and ppabcd_codeword. Each module handles the conversion
+between the two formats in the module's name. The functions from these modules
+are called via the mapping functions in compress40 which compress or decompress 
+each 2x2 block completely before operating on the next block. 40image contains
+the main function which handles command line arguments to decide whether to
+compress or decompress and where the image will come from. Bitpack contains
+functions to assist in the bit manipulation necessary for handling codewords.
+
+Time Spent:
+Analysis: 10 hours
+Problem Solving: 25 hours

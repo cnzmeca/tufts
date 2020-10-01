@@ -1,0 +1,14 @@
+body {
+	font-family: Arial, Helvetica;
+	background-color: gray;
+	text-align: center;
+}
+
+#lyrics {
+	font-size: 24px;
+}
+#title{
+	font-size: 60px;
+	
+}
+

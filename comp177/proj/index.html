@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Income Tax History</title>
+    <style>
+        body {
+            background-color:coral;
+            text-align: center;
+        }
+        h1 {
+            color: white;
+            margin-bottom: -20px;
+        }
+
+        h3 {
+            color: white;
+            margin-bottom: -20px;
+        }
+        
+        h2 {
+            color: white;
+            margin-top: -20px;
+            margin-bottom: -20px;
+        } 
+ 
+        svg {
+            display: block;
+            margin: auto;
+            margin-top: 50px;
+            margin-bottom: 50px
+        }
+        
+        button {
+            margin-top: 75px;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1></br>
+    <h3></h3>
+    <svg></svg>
+    <h2></h2>
+    <button></button>
+    
+    <script src="js/d3.v4.min.js"></script>
+    <script>
+       
+        var dim = 900;
+
+        var num = 0;
+ 
+        var title = d3.select("h1")
+        .text("Federal Income Tax Brackets Throughout History");
+
+        var subtitle = d3.select("h3")
+        .text("Year:");
+
+        var svg = d3.select('svg')
+        .attr('width', dim)
+        .attr('height', .5*dim)
+        .style('background-color', 'white');    
+
+        var r1 = svg.append("polygon")
+            .attr("id", "r1")
+            .attr("points", (1*dim/15) + "," + (dim/2) + " " + (1*dim/15) + "," + (dim/2) + " " + (2*dim/15) + "," + (dim/2) + " " + (2*dim/15) + "," + (dim/2))
+            .on("mouseover", function() {
+                d3.select("h2").text("Personal Exemptions for Single Persons");
+            });
+
+        var r2 = svg.append("polygon")
+            .attr("id", "r2")
+            .attr("points", (3*dim/15) + "," + (dim/2) + " " + (3*dim/15) + "," + (dim/2) + " " + (4*dim/15) + "," + (dim/2) + " " + (4*dim/15) + "," + (dim/2))
+            .on("mouseover", function() {
+                d3.select("h2").text("Personal Exemptions for Married Couples");
+            });
+
+        var r3 = svg.append("polygon")
+            .attr("id", "r3")
+            .attr("points", (5*dim/15) + "," + (dim/2) + " " + (5*dim/15) + "," + (dim/2) + " " + (6*dim/15) + "," + (dim/2) + " " + (6*dim/15) + "," + (dim/2))
+            .on("mouseover", function() {
+                d3.select("h2").text("Personal Exemptions for Dependents");
+            });
+
+        var r4 = svg.append("polygon")
+            .attr("id", "r4")
+            .attr("points", (7*dim/15) + "," + (dim/2) + " " + (7*dim/15) + "," + (dim/2) + " " + (8*dim/15) + "," + (dim/2) + " " + (8*dim/15) + "," + (dim/2))
+            .on("mouseover", function() {
+                d3.select("h2").text("Tax Rate for the Lowest Income Bracket");
+            });
+
+        var r5 = svg.append("polygon")
+            .attr("id", "r5")
+            .attr("points", (9*dim/15) + "," + (dim/2) + " " + (9*dim/15) + "," + (dim/2) + " " + (10*dim/15) + "," + (dim/2) + " " + (10*dim/15) + "," + (dim/2))
+            .on("mouseover", function() {
+                d3.select("h2").text("Maximum Income to Qualify for Lowest Income Bracket");
+            });
+
+        var r6 = svg.append("polygon")
+            .attr("id", "r6")
+            .attr("points", (11*dim/15) + "," + (dim/2) + " " + (11*dim/15) + "," + (dim/2) + " " + (12*dim/15) + "," + (dim/2) + " " + (12*dim/15) + "," + (dim/2))
+            .on("mouseover", function() {
+                d3.select("h2").text("Tax Rate for the Highest Income Bracket");
+            });
+
+        var r7 = svg.append("polygon")
+            .attr("id", "r7")
+            .attr("points", (13*dim/15) + "," + (dim/2) + " " + (13*dim/15) + "," + (dim/2) + " " + (14*dim/15) + "," + (dim/2) + " " + (14*dim/15) + "," + (dim/2))
+            .on("mouseover", function() {
+                d3.select("h2").text("Minimum Income to Qualify for Highest Income Bracket");
+            });
+
+        var t1 = svg.append("text")
+            .attr("id", "t1")
+            .text("YOLO")
+            .attr("x", 1*dim/15)
+            .attr("y", dim/2)
+            .attr("fill", "white")
+            .attr("font-size", "12px");            
+
+        var t2 = svg.append("text")
+            .attr("id", "t2")
+            .text("YOLO")
+            .attr("x", 3*dim/15)
+            .attr("y", dim/2)
+            .attr("fill", "white")
+            .attr("font-size", "12px");            
+
+        var t3 = svg.append("text")
+            .attr("id", "t3")
+            .text("YOLO")
+            .attr("x", 5*dim/15)
+            .attr("y", dim/2)
+            .attr("fill", "white")
+            .attr("font-size", "12px");            
+
+        var t4 = svg.append("text")
+            .attr("id", "t4")
+            .text("YOLO")
+            .attr("x", 7*dim/15)
+            .attr("y", dim/2)
+            .attr("fill", "white")
+            .attr("font-size", "12px");            
+
+        var t5 = svg.append("text")
+            .attr("id", "t5")
+            .text("YOLO")
+            .attr("x", 9*dim/15)
+            .attr("y", dim/2)
+            .attr("fill", "white")
+            .attr("font-size", "12px");            
+
+        var t6 = svg.append("text")
+            .attr("id", "t6")
+            .text("YOLO")
+            .attr("x", 11*dim/15)
+            .attr("y", dim/2)
+            .attr("fill", "white")
+            .attr("font-size", "12px");            
+
+        var t7 = svg.append("text")
+            .attr("id", "t7")
+            .text("YOLO")
+            .attr("x", 13*dim/15)
+            .attr("y", dim/2)
+            .attr("fill", "white")
+            .attr("font-size", "12px");            
+
+        var button = d3.select('button')
+        .text("Play")
+        .attr("onclick", "display();");
+
+        var info = d3.select("h2")
+        .text("Mouse over bars for details!");
+    
+        function update(d) {
+            d3.select("h3").text("Year: " + d["Year"]);
+            d3.select('#t1').text("$" + d["Single"]);
+            d3.select('#t2').text("$" + d["Married"]);
+            d3.select('#t3').text("$" + d["Dependent"]);
+            d3.select('#t4').text(d["LowRate"] + "%");
+            d3.select('#t5').text("$" + d["Under"]);
+            d3.select('#t6').text(d["HighRate"] + "%");
+            d3.select('#t7').text("$" + d["Over"]);
+            r1.transition().attr("points", (1*dim/15) + "," + (dim/2) + " " + (1*dim/15) + "," + (dim/2 - (parseInt((d["Single"]).replace(/,/g, ""))/4000)*dim/2) + " " + (2*dim/15) + "," + (dim/2 - (parseInt(d["Single"].replace(/,/g, ""))/4000)*dim/2) + " " + (2*dim/15) + "," + (dim/2) ).duration(500);
+            r2.transition().attr("points", (3*dim/15) + "," + (dim/2) + " " + (3*dim/15) + "," + (dim/2 - (parseInt(d["Married"].replace(/,/g, ""))/8000)*dim/2) + " " + (4*dim/15) + "," + (dim/2 - (parseInt(d["Married"].replace(/,/g, ""))/8000)*dim/2) + " " + (4*dim/15) + "," + (dim/2) ).duration(500);
+            r3.transition().attr("points", (5*dim/15) + "," + (dim/2) + " " + (5*dim/15) + "," + (dim/2 - (parseInt(d["Dependent"].replace(/,/g, ""))/4000)*dim/2) + " " + (6*dim/15) + "," + (dim/2 - (parseInt(d["Dependent"].replace(/,/g, ""))/4000)*dim/2) + " " + (6*dim/15) + "," + (dim/2) ).duration(500);
+            r4.transition().attr("points", (7*dim/15) + "," + (dim/2) + " " + (7*dim/15) + "," + (dim/2 - (parseInt(d["LowRate"].replace(/,/g, ""))/23)*dim/2) + " " + (8*dim/15) + "," + (dim/2 - (parseInt(d["LowRate"].replace(/,/g, ""))/23)*dim/2) + " " + (8*dim/15) + "," + (dim/2) ).duration(500);
+            r5.transition().attr("points", (9*dim/15) + "," + (dim/2) + " " + (9*dim/15) + "," + (dim/2 - (parseInt(d["Under"].replace(/,/g, ""))/43850)*dim/2) + " " + (10*dim/15) + "," + (dim/2 - (parseInt(d["Under"].replace(/,/g, ""))/43850)*dim/2) + " " + (10*dim/15) + "," + (dim/2) ).duration(500);
+            r6.transition().attr("points", (11*dim/15) + "," + (dim/2) + " " + (11*dim/15) + "," + (dim/2 - (parseInt(d["HighRate"].replace(/,/g, ""))/94)*dim/2) + " " + (12*dim/15) + "," + (dim/2 - (parseInt(d["HighRate"].replace(/,/g, ""))/94)*dim/2) + " " + (12*dim/15) + "," + (dim/2) ).duration(500);
+            r7.transition().attr("points", (13*dim/15) + "," + (dim/2) + " " + (13*dim/15) + "," + (dim/2 - (parseInt(d["Over"].replace(/,/g, ""))/5000000)*dim/2) + " " + (14*dim/15) + "," + (dim/2 - (parseInt(d["Over"].replace(/,/g, ""))/5000000)*dim/2) + " " + (14*dim/15) + "," + (dim/2) ).duration(500);
+            t1.transition().attr("y", (12 + dim/2 - (parseInt((d["Single"]).replace(/,/g, ""))/4000)*dim/2)).duration(500);
+            t2.transition().attr("y", (12 + dim/2 - (parseInt((d["Married"]).replace(/,/g, ""))/8000)*dim/2)).duration(500);
+            t3.transition().attr("y", (12 + dim/2 - (parseInt((d["Dependent"]).replace(/,/g, ""))/4000)*dim/2)).duration(500);
+            t4.transition().attr("y", (12 + dim/2 - (parseInt((d["LowRate"]).replace(/,/g, ""))/23)*dim/2)).duration(500);
+            t5.transition().attr("y", (12 + dim/2 - (parseInt((d["Under"]).replace(/,/g, ""))/43850)*dim/2)).duration(500);
+            t6.transition().attr("y", (12 + dim/2 - (parseInt((d["HighRate"]).replace(/,/g, ""))/94)*dim/2)).duration(500);
+            t7.transition().attr("y", (12 + dim/2 - (parseInt((d["Over"]).replace(/,/g, ""))/5000000)*dim/2)).duration(500);
+            }
+
+        function reset() {
+            var button = d3.select('button')
+            .text("Play")
+            .attr("onclick", "display();");
+        }
+
+        function display() {
+            var button = d3.select('button')
+            .text("Play")
+            .attr("onclick", ""); 
+            d3.tsv("data/data.tsv", function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    var d = data[i];
+                    setTimeout(update, 500*i, d);
+                }
+                setTimeout(reset, 500*data.length); 
+            });
+       }
+
+    </script>
+</body>
+</html>

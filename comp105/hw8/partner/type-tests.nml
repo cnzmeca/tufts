@@ -1,0 +1,3 @@
+(check-type-error (#t <= 1))
+(check-type-error (if #t (if #t 1 2) (if #t #t #f)))
+(check-type-error (lambda (x, y) (cons (cons x y) (cons y x))))

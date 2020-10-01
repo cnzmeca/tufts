@@ -1,0 +1,30 @@
+Written #1
+
+After experimenting with Kate, Emacs, and vim, I have decided that vim is my
+editor of choice. I think the spacing in vim is much cleaner, I appreciate the  self contained command window, I find the color scheme to be more visually
+pleasing, and I have had the least difficulty accessing it via terminal.
+
+Written #2
+
+16. C++ is easy to understand.
+17. It moves the output to the next line. It serves the same purpose as endl.
+18. This statement stores the next user input in the variable peas_per_pod.
+19. It calculates the total number of peas by multiplying the number of pods by
+the number of peas per pod.
+20. It tells the compiler where to go to find out how inputs and outputs work.
+
+Written #3
+
+-Grab a plate.
+-If bread is sliced, place 2 slices on plate. Otherwise use a knife to slice the bread into 2 slices and place them on the plate.
+-If both jars are not already open, open them.
+-Use a knife to remove 2 tablespoons of peanut butter from the jar and spread it on one slice of bread.
+-Use a new knife to remove a tablespoon of jelly from the jar and spread it on
+the other slice of bread.
+-Flip the slice of bread with jelly on it and place it on the other slice.
+
+Written #4
+
+One problem I ran in to quite often was forgetting a semicolon after a line of
+code. This issue was an error because it resulted in syntax the compiler didn't
+understand. I fixed it by inserting a semicolon in the appropriate location.

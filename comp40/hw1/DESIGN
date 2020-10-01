@@ -1,0 +1,75 @@
+Christian Zinck and Josh Mitchell
+HW 1 Design Doc
+
+Problem: Implement a program that takes any number of files as command line
+arguments and outputs the lines that are similar between two or more of the
+files.
+
+Use Case: 
+
+$./simlines file1 file2 file3
+
+file1:
+hello world
+mary had a little lamb
+go pats
+
+file2:
+how now brown cow
+hello world
+foo bar
+
+file3:
+comp 40 is fun
+black cherry is life
+hello world
+
+Output:
+hello world
+file1                     1
+file2                     2
+file3                     3
+
+Assumptions and constraints:
+- The files provided in command line exist and are accessable.
+- The Hanson ADTs function as described.
+- The readaline function sanitizes the file input.
+- There exists a hash function for c strings in Hanson's table.
+- For every iteration of reading input lines, the next line will be the first
+line without a sentinal character.
+
+Architecture:
+Modules:
+readaline: A function that takes a file as an input and selects the next unread
+line, removes all punctuation, and makes all letters lowercase.
+
+readData - A function that loops through all provided files and calls readaline
+on each file. The output of these function calls will be sorted
+into our data structure.
+
+printData - A function that loops though the data structure and prints all
+file-line combinations for the corresponding string.
+
+Data Structure:
+Our data structure will be a hash table whose elements will be structs. These
+structs will contain two components. One component will be a c string that is
+the sanitized version of a line from one of the files. The second component
+will be a set of key value pairs in which the key will be the file name and the
+value will be the line number(s) on which the line of the struct occurs.
+
+Implementation:
+1. Make readaline iterate through a file using sentinals.
+2. Make readaline sanitize and output each line of the file.
+3. Build the data structure to hold the file line information.
+4. Make readData hash all file lines.
+5. Make readData update the key value pairs in the structs.
+6. Make printData loop through the hash table and print all key value pairs.
+
+Testing:
+1. Test readaline by printing each line it visits to make sure it visits all
+lines once and only once.
+2. Test readaline to make sure all output lines are sanitized.
+3. Test readData by looping through hash table and printing all c string values.
+4. Test readData by writing printData.
+5. Test finished program with empty files, files with more than 256 characters
+in a line, and files with repeat lines.

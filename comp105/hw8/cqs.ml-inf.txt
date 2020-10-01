@@ -1,0 +1,47 @@
+Christian Zinck
+11/6/18
+
+1.
+a.      A mapping from names to values
+b.      A type
+c.      A type scheme
+d.      A mapping from names to type schemes
+e.      A type scheme includes a FORALL while a type does not
+
+2.      
+a.      Yes
+b.      Yes
+c.      No
+d.      i.      F
+        ii.     F
+        iii.    T
+        iv.     T
+
+3.      
+a.      C' = int ~ α₂ /\ α₂ ~ α₃ list /\ α₄ ~ α₃ list list
+b.      No
+c.      C'' = α₁ ~ int /\ int ~ α₃ list /\ α₄ ~ α₃ list list
+d.      No
+
+4.
+a.      θ₁ = (α ↦ int)
+b.      θ₂ = (α ↦ bool)
+c.      No
+d.      No
+e.      No
+
+5.
+a.      i.      c
+        ii.     α₁ ~ int /\ α₂ ~ bool /\ α₃ ~ 'c /\ f ~ α₁ * α₂ -> α₃
+b.      i.      a
+        ii.     T
+
+6.
+a.      (forall ('a) (list 'a))
+b.      Parameter empty-list has to have type (forall ('a) (list 'a)), but τ₁ is
+        not a forall type.
+
+7.
+a.      β
+b.      generalize(τ’, ftv(Γ))
+c.      (forall ('b) (list 'b))

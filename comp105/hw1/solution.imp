@@ -1,0 +1,152 @@
+;;Christian Zinck
+;;HW 1
+;;9/11/18
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(sigma m n) returns the sum of all integers between integers m and n inclusive
+;;for m <= n
+;;Laws:
+;;    (sigma m m) == m
+;;    (sigma m n) == (+ m (sigma (+ m 1) n))
+(define sigma (m n)
+    (if (< n m)
+        0
+        (+ m (sigma (+ m 1) n))))
+
+        (check-expect (sigma 5 5) 5)
+        (check-expect (sigma 0 10) 55)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(log b m) returns log m base b rounded up to the nearest integer for b > 1 and
+;;m > 0
+;;Laws:
+;;    (log b d) == 0
+;;    (log b (+ (* b m) d)) == (+ 1 (log b m))
+;;Proof system:
+;;A digit is any number d such that 0 <= d < b. It is also a natural number.
+;;All non-digit natural numbers are of the form (b x m + d) where m is a natural
+;;number and b is the base in question.
+(define log (b m)
+    (if (< m b)
+        0
+        (+ 1 (log b (/ m b))))) 
+
+        (check-expect (log 9 8) 0)
+        (check-expect (log 2 16) 4)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(divisible? x n) returns true if a positive integer n is divisible by any
+;;number greater than or equal to a positive integer x, and false otherwise
+;;Laws:
+;;    (divisible? x n) == (or (= 0 (mod n x)) (divisible? (+ x 1) n))
+(define divisible? (x n)
+    (if (< n (* x x))
+        0
+        (or (= 0 (mod n x)) (divisible? (+ x 1) n))))
+
+;;(prime? n) returns true if a positive integer n is prime, and false otherwise
+;;Laws:
+;;    (prime? 1) == 0
+;;    (prime? 2) == 1
+;;    (prime? n) == (not (divisible? 2 n))
+(define prime? (n)
+    (if (< n 2)
+        0
+        (if (= n 2)
+            1
+            (not (divisible? 2 n)))))
+
+        (check-assert (not (prime? 1)))
+        (check-assert (prime? 2))
+        (check-assert (not (prime? 4)))
+        (check-assert (prime? 37))
+
+;;(prime-helper x n) returns the nth prime number greater than or equal to a
+;;positive integer x where n is also a positive integer
+;;Laws:
+;;    (prime-helper x n) == (prime-helper (+ x 1) (- n 1)) for prime x
+;;    (prime-helper x n) == (prime-helper (+ x 1) (n)) for nonprime x
+;;    (prime-helper x 0) == x for prime x
+(define prime-helper (x n)
+    (if (prime? x)
+        (if (= n 1)
+            x
+            (prime-helper (+ x 1) (- n 1)))
+        (prime-helper (+ x 1) n)))
+
+;;(nthprime n) is a wrapper function that returns the nth prime number where n
+;;is a positive integer
+;;Laws:
+;;    (nthprime n) == (prime-helper 2 n)
+(define nthprime (n)
+    (prime-helper 2 n))
+
+        (check-expect (nthprime 1) 2)   
+        (check-expect (nthprime 10) 29) 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(binary n) returns a binary representation of an integer n
+;;Laws:
+;;    (binary b) == b
+;;    (binary (+ (* 2 m) b) == (+ b (* 10 (binary m)))
+(define binary (n)
+    (if (and (< n 2) (> n -2))
+        n
+        (+ (mod n 2) (* 10 (binary (/ n 2))))))
+
+        
+        (check-expect (binary 1) 1)
+
+        (check-expect (binary -5) -101)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(log10 n) returns log base 10 of a positive integer n rounded up to the
+;;nearest integer
+;;Laws:
+;;    (log10 d) == 0
+;;    (log10 (+ (* 10 m) d)) == (+ 1 (log10 m))
+(define log10 (n)
+    (if (< n 10)
+        0
+        (+ 1 (log10 (/ n 10)))))        
+
+        (check-expect (log10 9) 0)      
+        (check-expect (log10 19) 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(population-count n) returns the number of 1 bits in the binary representation
+;;of a nonnegative integer n
+;;Laws:
+;;    (population-count b) == b
+;;    (population-count (+ (* 2 m) b)) == (+ b (population-count m))
+(define population-count (n)
+    (if (< n 2)
+        n
+        (+ (mod n 2) (population-count (/ n 2)))))
+
+        (check-expect (population-count 1) 1)
+        (check-expect (population-count 3) 2)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(double-digit n) returns the same integer, but with each digit appearing twice
+;;instead of once. If n >= 20000, -1 is returned.
+;;Laws:
+;;    (double-digit d) == (* 11 d)
+;;    (double-digit (+ (* 10 m) d)) == (+ (* 11 d) (* 100 (double-digit m)))
+(define double-digit (n)
+    (if (<= 20000 n)
+        -1
+        (if (< n 10)
+            (* n 11)
+            (+ (* 100 (double-digit (/ n 10))) (* (mod n 10) 11)))))
+
+        (check-expect (double-digit 9) 99)
+        (check-expect (double-digit 11) 1111)
+        (check-expect (double-digit 20000) -1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(overflow) causes a checked run-time error indicating arithmetic overflow
+(define overflow ()
+    (* 2 9999999999999))
+        (check-error (overflow))
+
